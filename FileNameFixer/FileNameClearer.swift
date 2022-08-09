@@ -24,7 +24,7 @@ public class FileNameClearer {
     
     private func removeUnwantedWord(fileInfo : FileInfo)
     {
-        let words = [".XXX", ".SD", "MP4-KLEENEX",".2160p","1080p"]
+        let words = [".XXX", ".SD", "MP4-KLEENEX",".2160p","1080p","720p"]
         for word in words {
             fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: word, with: "")
         }
@@ -35,6 +35,7 @@ public class FileNameClearer {
         fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: "..", with: ".")
         fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.removeSuffix(".")
         fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: ".", with: " ")
+        fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.capitalizeWords()
     }
     
     private func replaceDate(fileInfo : FileInfo)

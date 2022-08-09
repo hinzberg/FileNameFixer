@@ -23,9 +23,14 @@ struct ContentView: View {
                     Label("Pick Files", systemImage: "folder.badge.plus")
                 }
             }
-            ToolbarItem(id: "cleanup") {
+            ToolbarItem(id: "rename") {
                 Button(action: rename) {
                         Label("Rename", systemImage: "wand.and.stars")
+                }
+            }
+            ToolbarItem(id: "cleanup") {
+                Button(action: clearList) {
+                        Label("Clear list", systemImage: "xmark.circle")
                 }
             }
         }
@@ -56,6 +61,11 @@ struct ContentView: View {
             print(info.currentFileNameWithPath + "\n" + info.fixedFileNameWithPath )
             _ = fileHelper.moveItemAtPath(sourcePath: info.currentFileNameWithPath, toPath: info.fixedFileNameWithPath)
         }
+    }
+    
+    func clearList()
+    {
+        self.fileInfoRepository.removeAll()
     }
 }
 

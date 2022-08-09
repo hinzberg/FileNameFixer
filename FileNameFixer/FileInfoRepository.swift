@@ -15,6 +15,10 @@ class FileInfoRepository : ObservableObject
         self.fileInfoList.append(fileInfo)
     }
     
+    func removeAll() {
+        fileInfoList.removeAll()
+    }
+        
     func CleanFileNames() {
         let clearer = FileNameClearer(fileInfoList: self.fileInfoList)
         clearer.clear()
