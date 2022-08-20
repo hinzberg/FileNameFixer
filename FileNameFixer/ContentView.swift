@@ -4,15 +4,17 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: View, FileInfoViewActionDelegateProtocol {
     
     @ObservedObject var fileInfoRepository = FileInfoRepository()
+    @State private var showingRenameSheet = false
+    @State var selectedFileInfo : FileInfo = FileInfo()
     
     var body: some View {
         VStack {
             List {
                 ForEach(fileInfoRepository.fileInfoList, id: \.id) { fileInfo in
-                    FileInfoView(fileInfo: fileInfo)
+                    FileInfoView(fileInfo: fileInfo, delegate: self)
                 }
             }
             Spacer()
@@ -33,6 +35,9 @@ struct ContentView: View {
                         Label("Clear list", systemImage: "xmark.circle")
                 }
             }
+        }
+        .sheet(isPresented: $showingRenameSheet ) {
+            FileRenameView(fileInfo: $selectedFileInfo)
         }
         .navigationTitle("File Name Fixer")
         .frame(width: 800, height: 500)
@@ -66,6 +71,15 @@ struct ContentView: View {
     func clearList()
     {
         self.fileInfoRepository.removeAll()
+    }
+    
+    func remove(fileInfo: FileInfo) {
+        self.fileInfoRepository.remove(fileInfo: fileInfo)
+    }
+    
+    func edit(fileInfo: FileInfo) {
+        selectedFileInfo = fileInfo
+        showingRenameSheet.toggle()
     }
 }
 

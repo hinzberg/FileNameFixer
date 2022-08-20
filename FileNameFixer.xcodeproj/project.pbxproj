@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F400F0928B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */; };
+		3F400F0B28B123D400A81D21 /* FileRenameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F400F0A28B123D400A81D21 /* FileRenameView.swift */; };
 		3F7176122892DE7200391C7B /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7176112892DE7200391C7B /* FileHelper.swift */; };
 		3F7176142892E3C700391C7B /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7176132892E3C700391C7B /* String + Extension.swift */; };
 		3FCA48522884903900809B82 /* FileNameFixerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA48512884903900809B82 /* FileNameFixerApp.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewActionDelegateProtocol.swift; sourceTree = "<group>"; };
+		3F400F0A28B123D400A81D21 /* FileRenameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRenameView.swift; sourceTree = "<group>"; };
 		3F7176112892DE7200391C7B /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		3F7176132892E3C700391C7B /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 		3FADDA8A28A2EE6F0039D834 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -73,10 +77,12 @@
 				3FCA485A2884903C00809B82 /* FileNameFixer.entitlements */,
 				3FCA48572884903C00809B82 /* Preview Content */,
 				3FCFA1082884969B0083B63E /* FileInfo.swift */,
-				3FCFA10A288496D40083B63E /* FileInfoRepository.swift */,
 				3FCFA10C28849ACD0083B63E /* FileInfoView.swift */,
+				3FCFA10A288496D40083B63E /* FileInfoRepository.swift */,
 				3FCFA10E28849C1C0083B63E /* FileNameClearer.swift */,
 				3F7176132892E3C700391C7B /* String + Extension.swift */,
+				3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */,
+				3F400F0A28B123D400A81D21 /* FileRenameView.swift */,
 			);
 			path = FileNameFixer;
 			sourceTree = "<group>";
@@ -163,6 +169,8 @@
 				3FCFA10F28849C1C0083B63E /* FileNameClearer.swift in Sources */,
 				3F7176142892E3C700391C7B /* String + Extension.swift in Sources */,
 				3FCA48542884903900809B82 /* ContentView.swift in Sources */,
+				3F400F0B28B123D400A81D21 /* FileRenameView.swift in Sources */,
+				3F400F0928B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift in Sources */,
 				3FCA48522884903900809B82 /* FileNameFixerApp.swift in Sources */,
 				3F7176122892DE7200391C7B /* FileHelper.swift in Sources */,
 				3FCFA10B288496D40083B63E /* FileInfoRepository.swift in Sources */,

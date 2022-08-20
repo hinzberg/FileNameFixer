@@ -1,18 +1,15 @@
-//
 //  FileInfo.swift
 //  FileNameFixer
-//
 //  Created by Holger Hinzberg on 17.07.22.
-//
 
 import Foundation
 
-public class FileInfo
+public class FileInfo : Equatable, Identifiable, ObservableObject
 {
     public var id = UUID()
     
-    public var fixedFileNameExtension : String
-    public var fixedFileNameWithoutExtension : String
+    @Published public var fixedFileNameExtension : String
+    @Published public var fixedFileNameWithoutExtension : String
     
     // Use this as source to rename file
     public var currentFileNameWithPath : String {
@@ -26,10 +23,13 @@ public class FileInfo
     
     public var fixedFileName : String {
         return fixedFileNameWithoutExtension + "." + fixedFileNameExtension }
-    
-    
+        
     private var currentFileUrl : URL
     private var currentUrlWithOutFilename : URL
+    
+    convenience init() {
+        self.init(url: URL(string: ".")!)
+    }
     
     init (url : URL)
     {
@@ -40,5 +40,9 @@ public class FileInfo
         let file: NSString =  NSString(string: currentFileName)
         self.fixedFileNameExtension = file.pathExtension
         self.fixedFileNameWithoutExtension = file.deletingPathExtension
+    }
+    
+    public static func ==(lhs: FileInfo, rhs: FileInfo) -> Bool {
+        return lhs.id == rhs.id
     }
 }
