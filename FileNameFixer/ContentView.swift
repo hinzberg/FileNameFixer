@@ -51,7 +51,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         if panel.runModal() == .OK
         {
             for url in panel.urls {
-                let file = FileInfo( url:  url)
+                let file = FileInfo(currentFileNameWithPathAndExtension: url.path, destinationFileNameWithPathAndExtension: url.path)
                 self.fileInfoRepository.append(fileInfo: file)
             }
             self.fileInfoRepository.CleanFileNames()
@@ -63,8 +63,9 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         let fileHelper = FileHelper()
         for info in  fileInfoRepository.fileInfoList
         {
-            print(info.currentFileNameWithPath + "\n" + info.fixedFileNameWithPath )
-            _ = fileHelper.moveItemAtPath(sourcePath: info.currentFileNameWithPath, toPath: info.fixedFileNameWithPath)
+            print("From : \(info.currentFileNameWithPathAndExtension)")
+            print("To : \(info.destinationFileNameWithPathExtension)")
+            _ = fileHelper.moveItemAtPath(sourcePath: info.currentFileNameWithPathAndExtension, toPath: info.destinationFileNameWithPathExtension)
         }
     }
     

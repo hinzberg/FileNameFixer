@@ -8,38 +8,57 @@ public class FileInfo : Equatable, Identifiable, ObservableObject
 {
     public var id = UUID()
     
-    @Published public var fixedFileNameExtension : String
-    @Published public var fixedFileNameWithoutExtension : String
+    // MARK: Current File
     
-    // Use this as source to rename file
-    public var currentFileNameWithPath : String {
-        return self.currentFileUrl.path }
+    @Published public var currentFileNameWithPathAndExtension : String = ""
     
-    // Use this as destination to rename file
-    public var fixedFileNameWithPath : String {
-        return self.currentUrlWithOutFilename.appendingPathComponent(fixedFileName).path }
-    
-    public var currentFileName : String
-    
-    public var fixedFileName : String {
-        return fixedFileNameWithoutExtension + "." + fixedFileNameExtension }
+    public var currentFileNameOnly : String {
+        let file: NSString =  NSString(string: currentFileNameWithPathAndExtension)
+        return file.lastPathComponent }
         
-    private var currentFileUrl : URL
-    private var currentUrlWithOutFilename : URL
+    public var currentFilePathOnly : String {
+        let file: NSString =  NSString(string: currentFileNameWithPathAndExtension)
+        return file.deletingLastPathComponent}
     
-    convenience init() {
-        self.init(url: URL(string: ".")!)
-    }
+    public var currentFileExtensionOnly : String {
+        let file: NSString =  NSString(string: currentFileNameWithPathAndExtension)
+        return file.pathExtension }
     
-    init (url : URL)
+    public var currentFileNameOnlyWithOutExtension : String {
+        var filename: NSString = NSString(string: currentFileNameWithPathAndExtension)
+        filename = NSString(string: filename.lastPathComponent)
+        return  filename.deletingPathExtension }
+        
+    // MARK: Destination File
+       
+    @Published public var destinationFileNameWithPathExtension : String  = ""
+   
+    public var destinationFileNameOnly : String {
+        let filename: NSString = NSString(string: destinationFileNameWithPathExtension)
+        return  filename.lastPathComponent }
+    
+    public var destinationFilePathOnly : String {
+        let file: NSString =  NSString(string: destinationFileNameWithPathExtension)
+        return file.deletingLastPathComponent}
+    
+    public var destinationFileExtensionOnly : String {
+        let file: NSString =  NSString(string: destinationFileNameWithPathExtension)
+        return file.pathExtension }
+    
+    public var destinationFileNameOnlyWithOutExtension : String {
+        var filename: NSString = NSString(string: destinationFileNameWithPathExtension)
+        filename = NSString(string: filename.lastPathComponent)
+        return  filename.deletingPathExtension }
+    
+    // MARK: init
+        
+    init (currentFileNameWithPathAndExtension : String = "", destinationFileNameWithPathAndExtension : String = "")
     {
-        self.currentFileUrl = url
-        self.currentUrlWithOutFilename = url.deletingLastPathComponent()
+        if  currentFileNameWithPathAndExtension != "" {
+            self.currentFileNameWithPathAndExtension = currentFileNameWithPathAndExtension}
         
-        self.currentFileName = url.lastPathComponent
-        let file: NSString =  NSString(string: currentFileName)
-        self.fixedFileNameExtension = file.pathExtension
-        self.fixedFileNameWithoutExtension = file.deletingPathExtension
+        if  destinationFileNameWithPathAndExtension != "" {
+            self.destinationFileNameWithPathExtension = destinationFileNameWithPathAndExtension}
     }
     
     public static func ==(lhs: FileInfo, rhs: FileInfo) -> Bool {

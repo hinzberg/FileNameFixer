@@ -26,20 +26,21 @@ public class FileNameClearer {
     {
         let words = [".XXX", ".SD", "MP4-KLEENEX",".2160p","1080p","720p"]
         for word in words {
-            fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: word, with: "")
+           // fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: word, with: "")
         }
     }
     
     private func removeUnwantedCharacters(fileInfo : FileInfo)
     {
-        fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: "..", with: ".")
-        fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.removeSuffix(".")
-        fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: ".", with: " ")
-        fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.capitalizeWords()
+     //   fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: "..", with: ".")
+     //   fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.removeSuffix(".")
+     //   fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: ".", with: " ")
+     //   fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.capitalizeWords()
     }
     
     private func replaceDate(fileInfo : FileInfo)
     {
+        /*
         let matched = matches(for: "[0-9]{2}.[0-9]{2}.[0-9]{2}", in: fileInfo.fixedFileName)
         for match in matched {
             let parts = match.components(separatedBy: ".")
@@ -49,6 +50,7 @@ public class FileNameClearer {
                 fileInfo.fixedFileNameWithoutExtension = newDate + fileInfo.fixedFileNameWithoutExtension
             }
         }
+         */
         // print(matched)
     }
     

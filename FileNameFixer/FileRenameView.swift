@@ -22,8 +22,10 @@ struct FileRenameView: View {
             
             HStack {
                 Spacer()
-                Button("Rename") {
-                    fileInfo.fixedFileNameWithoutExtension = textContent
+                Button("Set Name") {
+                    var url = URL(fileURLWithPath: fileInfo.currentFilePathOnly)
+                    url = url.appendingPathComponent(textContent + "." + fileInfo.destinationFileExtensionOnly)
+                    fileInfo.destinationFileNameWithPathExtension = url.path
                     self.presentationMode.wrappedValue.dismiss()
                 }.keyboardShortcut(.defaultAction)
                 
@@ -34,7 +36,11 @@ struct FileRenameView: View {
         }
             .frame(width: 400)
             .onAppear(perform: {
-                textContent = fileInfo.fixedFileNameWithoutExtension
+                if fileInfo.currentFileNameOnly == fileInfo.destinationFileNameOnlyWithOutExtension {
+                    textContent = fileInfo.currentFileNameOnly
+                } else {
+                    textContent = fileInfo.destinationFileNameOnlyWithOutExtension
+                }
             } )
     }
 }

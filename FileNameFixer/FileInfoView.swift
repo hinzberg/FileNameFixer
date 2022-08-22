@@ -14,13 +14,13 @@ struct FileInfoView: View {
         HStack {
             VStack{
                 HStack {
-                    Text(fileInfo.currentFileName)
+                    Text(fileInfo.currentFileNameOnly)
                         .font(.title2)
                         .foregroundColor(.accentColor)
                     Spacer()
                 }
                 HStack {
-                    Text(fileInfo.fixedFileName)
+                    Text(fileInfo.destinationFileNameOnly)
                         .font(.title2)
                         .foregroundColor(.black)
                     Spacer()
