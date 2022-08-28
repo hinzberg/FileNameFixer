@@ -4,11 +4,16 @@
 
 import SwiftUI
 
+class Selected : ObservableObject {
+    @Published var fileName = ""
+    @Published var fileInfo  = FileInfo()
+}
+
 struct ContentView: View, FileInfoViewActionDelegateProtocol {
     
     @ObservedObject var fileInfoRepository = FileInfoRepository()
     @State private var showingRenameSheet = false
-    @State var selectedFileInfo : FileInfo = FileInfo()
+    @ObservedObject var selected = Selected()
     
     var body: some View {
         VStack {
@@ -37,10 +42,18 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
             }
         }
         .sheet(isPresented: $showingRenameSheet ) {
-            FileRenameView(fileInfo: $selectedFileInfo)
+            showTextInputRenameSheet()
         }
         .navigationTitle("File Name Fixer")
         .frame(width: 800, height: 500)
+    }
+    
+    func showTextInputRenameSheet() -> some View {
+        return TextInputView(text: selected.fileName) { textContent in
+            var url = URL(fileURLWithPath: selected.fileInfo.currentFilePathOnly)
+            url = url.appendingPathComponent(textContent + "." + selected.fileInfo.destinationFileExtensionOnly)
+            selected.fileInfo.destinationFileNameWithPathExtension = url.path
+        }
     }
     
     func filePicker()
@@ -79,7 +92,13 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     }
     
     func edit(fileInfo: FileInfo) {
-        selectedFileInfo = fileInfo
+        selected.fileInfo = fileInfo
+        
+        if fileInfo.currentFileNameOnly == fileInfo.destinationFileNameOnlyWithOutExtension {
+            selected.fileName = fileInfo.currentFileNameOnly
+        } else {
+            selected.fileName = fileInfo.destinationFileNameOnlyWithOutExtension
+        }
         showingRenameSheet.toggle()
     }
 }

@@ -1,5 +1,8 @@
 #  FileNameFixer
 
+### 2022-08-28
+- Generic TextInputView
+
 ### 2022-08-22
 - Codecleanup FileInfo class
 
