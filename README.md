@@ -1,5 +1,9 @@
 #  FileNameFixer
 
+### 2022-08-30
+- Repository Protocol
+- FileInfoRepository as base class for ContentViewController
+
 ### 2022-08-28
 - Generic TextInputView
 

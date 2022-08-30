@@ -4,23 +4,46 @@
 
 import Foundation
 
-class FileInfoRepository : ObservableObject
+public class FileInfoRepository : RepositoryProtocol, ObservableObject
 {
-    @Published var fileInfoList = [FileInfo]()
+    typealias RepositoryType = FileInfo
     
-    func append( fileInfo : FileInfo) {
-        self.fileInfoList.append(fileInfo)
+    @Published  var fileInfoList = [FileInfo]()
+    
+    func getCount() -> Int {
+        return fileInfoList.count
     }
     
-    func removeAll() {
-        fileInfoList.removeAll()
+    func add(item: FileInfo) -> Void {
+        fileInfoList.append(item)
     }
     
-    func remove( fileInfo : FileInfo) {
-        
-        if let i = fileInfoList.firstIndex(of: fileInfo) {
+    func addMany(item: [FileInfo]) -> Void {
+    }
+    
+    func remove(item: FileInfo) -> Void {
+        if let i = fileInfoList.firstIndex(of: item) {
             fileInfoList.remove(at: i)
         }
+    }
+    
+    func removeMany(item: [FileInfo]) -> Void {
+    }
+    
+    func getAll() -> [FileInfo] {
+        return fileInfoList
+    }
+    
+    func get(id: UUID) -> FileInfo? {
+        return nil
+    }
+    
+    func clear() -> Void {
+        fileInfoList.removeAll()
+    }
+   
+    func removeAll() -> Void  {
+        fileInfoList.removeAll()
     }
     
     func CleanFileNames() {

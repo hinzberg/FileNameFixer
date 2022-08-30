@@ -4,21 +4,15 @@
 
 import SwiftUI
 
-class Selected : ObservableObject {
-    @Published var fileName = ""
-    @Published var fileInfo  = FileInfo()
-}
-
 struct ContentView: View, FileInfoViewActionDelegateProtocol {
     
-    @ObservedObject var fileInfoRepository = FileInfoRepository()
-    @State private var showingRenameSheet = false
-    @ObservedObject var selected = Selected()
-    
+    @ObservedObject var controller = ContentViewController()
+    @State var showingRenameSheet = false
+        
     var body: some View {
         VStack {
             List {
-                ForEach(fileInfoRepository.fileInfoList, id: \.id) { fileInfo in
+                ForEach(controller.fileInfoList, id: \.id) { fileInfo in
                     FileInfoView(fileInfo: fileInfo, delegate: self)
                 }
             }
@@ -49,10 +43,10 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     }
     
     func showTextInputRenameSheet() -> some View {
-        return TextInputView(text: selected.fileName) { textContent in
-            var url = URL(fileURLWithPath: selected.fileInfo.currentFilePathOnly)
-            url = url.appendingPathComponent(textContent + "." + selected.fileInfo.destinationFileExtensionOnly)
-            selected.fileInfo.destinationFileNameWithPathExtension = url.path
+        return TextInputView(text: controller.selected.fileName) { textContent in
+            var url = URL(fileURLWithPath: controller.selected.fileInfo.currentFilePathOnly)
+            url = url.appendingPathComponent(textContent + "." + controller.selected.fileInfo.destinationFileExtensionOnly)
+            controller.selected.fileInfo.destinationFileNameWithPathExtension = url.path
         }
     }
     
@@ -65,16 +59,16 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         {
             for url in panel.urls {
                 let file = FileInfo(currentFileNameWithPathAndExtension: url.path, destinationFileNameWithPathAndExtension: url.path)
-                self.fileInfoRepository.append(fileInfo: file)
+                controller.add(item: file)
             }
-            self.fileInfoRepository.CleanFileNames()
+            controller.CleanFileNames()
         }
     }
     
     func rename()
     {
         let fileHelper = FileHelper()
-        for info in  fileInfoRepository.fileInfoList
+        for info in  controller.fileInfoList
         {
             print("From : \(info.currentFileNameWithPathAndExtension)")
             print("To : \(info.destinationFileNameWithPathExtension)")
@@ -84,20 +78,20 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     
     func clearList()
     {
-        self.fileInfoRepository.removeAll()
+        controller.removeAll()
     }
     
     func remove(fileInfo: FileInfo) {
-        self.fileInfoRepository.remove(fileInfo: fileInfo)
+        controller.remove(item: fileInfo)
     }
     
     func edit(fileInfo: FileInfo) {
-        selected.fileInfo = fileInfo
+        controller.selected.fileInfo = fileInfo
         
         if fileInfo.currentFileNameOnly == fileInfo.destinationFileNameOnlyWithOutExtension {
-            selected.fileName = fileInfo.currentFileNameOnly
+            controller.selected.fileName = fileInfo.currentFileNameOnly
         } else {
-            selected.fileName = fileInfo.destinationFileNameOnlyWithOutExtension
+            controller.selected.fileName = fileInfo.destinationFileNameOnlyWithOutExtension
         }
         showingRenameSheet.toggle()
     }
