@@ -24,34 +24,50 @@ public class FileNameClearer {
     
     private func removeUnwantedWord(fileInfo : FileInfo)
     {
+        var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
+        
         let words = [".XXX", ".SD", "MP4-KLEENEX",".2160p","1080p","720p"]
         for word in words {
-           // fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: word, with: "")
+            textContent = textContent.replacingOccurrences(of: word, with: "")
         }
+        
+        self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
     }
     
     private func removeUnwantedCharacters(fileInfo : FileInfo)
     {
-     //   fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: "..", with: ".")
-     //   fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.removeSuffix(".")
-     //   fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: ".", with: " ")
-     //   fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.capitalizeWords()
-    }
+        var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
+        
+        textContent = textContent.replacingOccurrences(of: "..", with: ".")
+        textContent = textContent.removeSuffix(".")
+        textContent = textContent.replacingOccurrences(of: ".", with: " ")
+        textContent = textContent.capitalizeWords()
+        
+        self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
+   }
     
     private func replaceDate(fileInfo : FileInfo)
     {
-        /*
-        let matched = matches(for: "[0-9]{2}.[0-9]{2}.[0-9]{2}", in: fileInfo.fixedFileName)
+        var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
+        
+        let matched = matches(for: "[0-9]{2}.[0-9]{2}.[0-9]{2}", in: textContent)
         for match in matched {
             let parts = match.components(separatedBy: ".")
             if parts.count == 3 {
                 let newDate =  "20\(parts[0])-\(parts[1])-\(parts[2]) "
-                fileInfo.fixedFileNameWithoutExtension = fileInfo.fixedFileNameWithoutExtension.replacingOccurrences(of: match, with: "")
-                fileInfo.fixedFileNameWithoutExtension = newDate + fileInfo.fixedFileNameWithoutExtension
+                textContent = textContent.replacingOccurrences(of: match, with: "")
+                textContent = newDate + textContent
             }
         }
-         */
-        // print(matched)
+        
+        self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
+    }
+    
+    private func changeDestinationFileName(fileInfo : FileInfo, newFileName : String)
+    {
+        var url = URL(fileURLWithPath: fileInfo.destinationFilePathOnly)
+        url = url.appendingPathComponent(newFileName + "." + fileInfo.destinationFileExtensionOnly)
+        fileInfo.destinationFileNameWithPathExtension = url.path
     }
     
     private func matches(for regex: String, in text: String) -> [String]
