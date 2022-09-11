@@ -2,7 +2,10 @@
 //  FileNameFixer
 //  Created by Holger Hinzberg on 17.07.22.
 
+
+
 import SwiftUI
+import Hinzberg_SwiftUI
 
 struct ContentView: View, FileInfoViewActionDelegateProtocol {
     

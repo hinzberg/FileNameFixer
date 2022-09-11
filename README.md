@@ -1,5 +1,9 @@
 #  FileNameFixer
 
+### 2022-09-11
+- Added Swift Package: Hinzberg-Foundation
+- Added Swift Package: Hinzberg-SwiftUI
+
 ### 2022-08-30
 - Repository Protocol
 - FileInfoRepository as base class for ContentViewController
