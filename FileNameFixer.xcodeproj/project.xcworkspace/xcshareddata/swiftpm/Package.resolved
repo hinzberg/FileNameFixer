@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "hinzberg-foundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hinzberg/Hinzberg-Foundation",
+      "state" : {
+        "branch" : "main",
+        "revision" : "16cc3d9246adb1b52f351d68a6b9692a9006c908"
+      }
+    },
+    {
+      "identity" : "hinzberg-swiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hinzberg/Hinzberg-SwiftUI",
+      "state" : {
+        "branch" : "main",
+        "revision" : "81afb04c37971411488748413661ec8fb259aaf8"
+      }
+    }
+  ],
+  "version" : 2
+}
