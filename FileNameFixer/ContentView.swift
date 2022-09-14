@@ -46,7 +46,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     }
     
     func showTextInputRenameSheet() -> some View {
-        return TextInputView(text: controller.selected.fileName) { textContent in
+        return TextInputView(defaultText: controller.selected.fileName) { textContent in
             var url = URL(fileURLWithPath: controller.selected.fileInfo.currentFilePathOnly)
             url = url.appendingPathComponent(textContent + "." + controller.selected.fileInfo.destinationFileExtensionOnly)
             controller.selected.fileInfo.destinationFileNameWithPathExtension = url.path
