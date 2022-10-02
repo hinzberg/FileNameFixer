@@ -28,6 +28,13 @@ public class FileInfo : Equatable, Identifiable, ObservableObject
         var filename: NSString = NSString(string: currentFileNameWithPathAndExtension)
         filename = NSString(string: filename.lastPathComponent)
         return  filename.deletingPathExtension }
+    
+    public var currentAndDestinationNameAreTheSame : Bool {
+        if currentFileNameOnly.caseInsensitiveCompare(self.destinationFileNameOnly) == .orderedSame {
+            return true
+        }
+        return false
+    }
         
     // MARK: Destination File
        

@@ -1,14 +1,21 @@
-//  FileInfoRepository.swift
+//  ContentViewStore.swift
 //  FileNameFixer
-//  Created by Holger Hinzberg on 17.07.22.
+//  Created by Holger Hinzberg on 29.08.22.
 
 import Foundation
+import SwiftUI
 import Hinzberg_Foundation
 
-public class FileInfoRepository : RepositoryProtocol, ObservableObject
+public class Selected : ObservableObject {
+    @Published var fileName = ""
+    @Published var fileInfo  = FileInfo()
+}
+
+public class ContentViewStore :  RepositoryProtocol, ObservableObject
 {
     public typealias RepositoryType = FileInfo
     
+    @Published public var selected = Selected()
     @Published  var fileInfoList = [FileInfo]()
     
     public func getCount() -> Int {

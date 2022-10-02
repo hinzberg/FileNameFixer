@@ -2,25 +2,26 @@
 //  FileNameFixer
 //  Created by Holger Hinzberg on 17.07.22.
 
-
-
 import SwiftUI
 import Hinzberg_SwiftUI
 
 struct ContentView: View, FileInfoViewActionDelegateProtocol {
     
-    @ObservedObject var controller = ContentViewController()
+    @ObservedObject var store = ContentViewStore()
     @State var showingRenameSheet = false
+    @State var statusText : String = ""
         
     var body: some View {
         VStack {
             List {
-                ForEach(controller.fileInfoList, id: \.id) { fileInfo in
+                ForEach(store.fileInfoList, id: \.id) { fileInfo in
                     FileInfoView(fileInfo: fileInfo, delegate: self)
                 }
             }
-            Spacer()
+            StatusView(statusText: $statusText)
+                .frame(height: 25)
         }
+        
         .toolbar (id: "main") {
             ToolbarItem(id: "files") {
                 Button(action: filePicker) {
@@ -34,7 +35,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
             }
             ToolbarItem(id: "cleanup") {
                 Button(action: clearList) {
-                        Label("Clear list", systemImage: "xmark.circle")
+                        Label("Clear list", systemImage: "trash.fill")
                 }
             }
         }
@@ -46,10 +47,10 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     }
     
     func showTextInputRenameSheet() -> some View {
-        return TextInputView(defaultText: controller.selected.fileName) { textContent in
-            var url = URL(fileURLWithPath: controller.selected.fileInfo.currentFilePathOnly)
-            url = url.appendingPathComponent(textContent + "." + controller.selected.fileInfo.destinationFileExtensionOnly)
-            controller.selected.fileInfo.destinationFileNameWithPathExtension = url.path
+        return TextInputView(defaultText: store.selected.fileName) { textContent in
+            var url = URL(fileURLWithPath: store.selected.fileInfo.currentFilePathOnly)
+            url = url.appendingPathComponent(textContent + "." + store.selected.fileInfo.destinationFileExtensionOnly)
+            store.selected.fileInfo.destinationFileNameWithPathExtension = url.path
         }
     }
     
@@ -62,39 +63,65 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         {
             for url in panel.urls {
                 let file = FileInfo(currentFileNameWithPathAndExtension: url.path, destinationFileNameWithPathAndExtension: url.path)
-                controller.add(item: file)
+                store.add(item: file)
             }
-            controller.CleanFileNames()
+            
+            store.CleanFileNames()
+
+            if store.getCount() == 1 {
+                statusText = "One file selected"
+            }
+            else if store.getCount() > 0 {
+                statusText = "\(store.getCount()) files selected"
+            }
+            else {
+                statusText = "No file selected"
+            }
         }
     }
     
     func rename()
     {
+        var renamedCounter = 0
         let fileHelper = FileHelper()
-        for info in  controller.fileInfoList
+        let filesToRename = store.fileInfoList.filter { $0.currentAndDestinationNameAreTheSame == false }
+        
+        for info in  filesToRename
         {
             print("From : \(info.currentFileNameWithPathAndExtension)")
             print("To : \(info.destinationFileNameWithPathExtension)")
             _ = fileHelper.moveItemAtPath(sourcePath: info.currentFileNameWithPathAndExtension, toPath: info.destinationFileNameWithPathExtension)
+            renamedCounter = renamedCounter + 1
+        }
+        
+        if renamedCounter == 1 {
+            statusText = "One file renamed"
+        }
+        else if store.getCount() > 0 {
+            statusText = "\(renamedCounter) files renamed"
+        }
+        else {
+            statusText = "No file renamed"
         }
     }
     
     func clearList()
     {
-        controller.removeAll()
+        store.removeAll()
+        statusText = ""
     }
     
     func remove(fileInfo: FileInfo) {
-        controller.remove(item: fileInfo)
+        store.remove(item: fileInfo)
     }
     
     func edit(fileInfo: FileInfo) {
-        controller.selected.fileInfo = fileInfo
+        store.selected.fileInfo = fileInfo
         
         if fileInfo.currentFileNameOnly == fileInfo.destinationFileNameOnlyWithOutExtension {
-            controller.selected.fileName = fileInfo.currentFileNameOnly
+            store.selected.fileName = fileInfo.currentFileNameOnly
         } else {
-            controller.selected.fileName = fileInfo.destinationFileNameOnlyWithOutExtension
+            store.selected.fileName = fileInfo.destinationFileNameOnlyWithOutExtension
         }
         showingRenameSheet.toggle()
     }

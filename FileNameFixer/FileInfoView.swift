@@ -16,13 +16,13 @@ struct FileInfoView: View {
                 HStack {
                     Text(fileInfo.currentFileNameOnly)
                         .font(.title2)
-                        .foregroundColor(.accentColor)
+                        .foregroundColor(.black)
                     Spacer()
                 }
                 HStack {
                     Text(fileInfo.destinationFileNameOnly)
                         .font(.title2)
-                        .foregroundColor(.black)
+                        .foregroundColor(fileInfo.currentAndDestinationNameAreTheSame ? .green : .red )
                     Spacer()
                 }
             }
@@ -30,7 +30,6 @@ struct FileInfoView: View {
             Spacer()
             
             HStack {
-                
                 Button {
                     delegate?.edit(fileInfo: self.fileInfo)
                 } label: {
@@ -44,7 +43,7 @@ struct FileInfoView: View {
                 Button {
                     delegate?.remove(fileInfo: self.fileInfo)
                 } label: {
-                    Image(systemName: "trash.fill")
+                    Image(systemName: "xmark.circle")
                         .resizable()
                         .frame(width: 20, height: 20, alignment: .center)
                         .foregroundColor(.red)
