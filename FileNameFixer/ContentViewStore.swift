@@ -6,7 +6,7 @@ import Foundation
 import SwiftUI
 import Hinzberg_Foundation
 
-public class Selected : ObservableObject {
+public class SelectedInfo : ObservableObject {
     @Published var fileName = ""
     @Published var fileInfo  = FileInfo()
 }
@@ -15,7 +15,7 @@ public class ContentViewStore :  RepositoryProtocol, ObservableObject
 {
     public typealias RepositoryType = FileInfo
     
-    @Published public var selected = Selected()
+    @Published public var selectedForRename = SelectedInfo()
     @Published  var fileInfoList = [FileInfo]()
     
     public func getCount() -> Int {

@@ -10,7 +10,6 @@ struct FileInfoView: View {
     var delegate : FileInfoViewActionDelegateProtocol?
     
     var body: some View {
-        
         HStack {
             VStack{
                 HStack {
@@ -25,6 +24,9 @@ struct FileInfoView: View {
                         .foregroundColor(fileInfo.currentAndDestinationNameAreTheSame ? .green : .red )
                     Spacer()
                 }
+            }
+            .onTapGesture {
+                fileInfo.selected.toggle()
             }
             
             Spacer()
@@ -49,6 +51,11 @@ struct FileInfoView: View {
                         .foregroundColor(.red)
                 }  .buttonStyle(.borderless)                
             }
+        }
+        .padding(3)
+        .background(fileInfo.selected ? Color.accentColor.opacity(0.1) : Color(NSColor.controlBackgroundColor) )
+        .onTapGesture {
+            fileInfo.selected.toggle()
         }
     }
 }

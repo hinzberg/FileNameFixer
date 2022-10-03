@@ -1,5 +1,8 @@
 #  FileNameFixer
 
+### 2022-10-03
+- SelectedItem Background Color
+
 ### 2022-10-02
 - Destination filename red color if different from source File name , else green color
 - Delete / Clear icons swaped 

@@ -7,6 +7,7 @@ import Foundation
 public class FileInfo : Equatable, Identifiable, ObservableObject
 {
     public var id = UUID()
+    @Published var selected : Bool = false
     
     // MARK: Current File
     

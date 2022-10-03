@@ -16,8 +16,9 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
             List {
                 ForEach(store.fileInfoList, id: \.id) { fileInfo in
                     FileInfoView(fileInfo: fileInfo, delegate: self)
-                }
-            }
+                }.listRowInsets(EdgeInsets())
+            }.listStyle(PlainListStyle())
+       
             StatusView(statusText: $statusText)
                 .frame(height: 25)
         }
@@ -47,10 +48,10 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     }
     
     func showTextInputRenameSheet() -> some View {
-        return TextInputView(defaultText: store.selected.fileName) { textContent in
-            var url = URL(fileURLWithPath: store.selected.fileInfo.currentFilePathOnly)
-            url = url.appendingPathComponent(textContent + "." + store.selected.fileInfo.destinationFileExtensionOnly)
-            store.selected.fileInfo.destinationFileNameWithPathExtension = url.path
+        return TextInputView(defaultText: store.selectedForRename.fileName) { textContent in
+            var url = URL(fileURLWithPath: store.selectedForRename.fileInfo.currentFilePathOnly)
+            url = url.appendingPathComponent(textContent + "." + store.selectedForRename.fileInfo.destinationFileExtensionOnly)
+            store.selectedForRename.fileInfo.destinationFileNameWithPathExtension = url.path
         }
     }
     
@@ -116,12 +117,12 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     }
     
     func edit(fileInfo: FileInfo) {
-        store.selected.fileInfo = fileInfo
+        store.selectedForRename.fileInfo = fileInfo
         
         if fileInfo.currentFileNameOnly == fileInfo.destinationFileNameOnlyWithOutExtension {
-            store.selected.fileName = fileInfo.currentFileNameOnly
+            store.selectedForRename.fileName = fileInfo.currentFileNameOnly
         } else {
-            store.selected.fileName = fileInfo.destinationFileNameOnlyWithOutExtension
+            store.selectedForRename.fileName = fileInfo.destinationFileNameOnlyWithOutExtension
         }
         showingRenameSheet.toggle()
     }
