@@ -55,7 +55,7 @@ public class ContentViewStore :  RepositoryProtocol, ObservableObject
     }
     
     func CleanFileNames() {
-        let clearer = FileNameClearer(fileInfoList: self.fileInfoList)
+        let clearer = FileInfoNameClearer(fileInfoList: self.fileInfoList)
         clearer.clear()
     }
 }

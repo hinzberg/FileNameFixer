@@ -1,10 +1,10 @@
-//  FileNameClearer.swift
-//  FileNameFixer
+//  FileInfoNameClearer.swift
+//  FileInfoNameClearer
 //  Created by Holger Hinzberg on 17.07.22.
 
 import Foundation
 
-public class FileNameClearer {
+public class FileInfoNameClearer {
     
     var fileInfoList : [FileInfo]
     
@@ -17,23 +17,27 @@ public class FileNameClearer {
     {
         for fileInfo in fileInfoList {
             replaceDate(fileInfo: fileInfo)
-            removeUnwantedWord(fileInfo: fileInfo)
+            removeUnwantedWords(fileInfo: fileInfo)
             removeUnwantedCharacters(fileInfo: fileInfo)
         }
     }
     
-    private func removeUnwantedWord(fileInfo : FileInfo)
+    /// Remove unwanted Words from Destination Filename
+    /// - Parameter fileInfo: FileInfo
+    private func removeUnwantedWords(fileInfo : FileInfo)
     {
+        let unwantedWords = [".XXX", ".SD", "MP4-KLEENEX",".2160p","1080p","720p"]
         var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
-        
-        let words = [".XXX", ".SD", "MP4-KLEENEX",".2160p","1080p","720p"]
-        for word in words {
+               
+        for word in unwantedWords {
             textContent = textContent.replacingOccurrences(of: word, with: "")
         }
         
         self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
     }
-    
+        
+    /// Remove unwanted characters from destination filename
+    /// - Parameter fileInfo: FileInfo
     private func removeUnwantedCharacters(fileInfo : FileInfo)
     {
         var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
@@ -45,7 +49,10 @@ public class FileNameClearer {
         
         self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
    }
-    
+        
+    ///  If a date is found in the filename it will be removed and added
+    ///  to the front of the filename in a new format
+    /// - Parameter fileInfo: FileInfo
     private func replaceDate(fileInfo : FileInfo)
     {
         var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
@@ -69,7 +76,12 @@ public class FileNameClearer {
         url = url.appendingPathComponent(newFileName + "." + fileInfo.destinationFileExtensionOnly)
         fileInfo.destinationFileNameWithPathExtension = url.path
     }
-    
+        
+    /// Helper Function for RegEx
+    /// - Parameters:
+    ///   - regex: Regex to match for
+    ///   - text: The string to search in
+    /// - Returns: A String array of all matches
     private func matches(for regex: String, in text: String) -> [String]
     {
         do {

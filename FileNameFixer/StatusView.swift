@@ -1,9 +1,6 @@
-//
 //  StatusView.swift
 //  FileNameFixer
-//
 //  Created by Holger Hinzberg on 02.10.22.
-//
 
 import SwiftUI
 
@@ -18,9 +15,6 @@ struct StatusView: View {
                         .foregroundColor(.black)
             Spacer()
         }
-        
-
-                   
     }
 }
 
