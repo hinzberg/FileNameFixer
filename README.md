@@ -1,5 +1,9 @@
 #  FileNameFixer
 
+### 2023-09-05
+- Added Versionnumber to Title
+- List now total width of window
+
 ### 2022-10-03
 - SelectedItem Background Color
 

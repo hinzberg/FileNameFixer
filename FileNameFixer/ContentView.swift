@@ -13,12 +13,12 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         
     var body: some View {
         VStack {
-            List {
-                ForEach(store.fileInfoList, id: \.id) { fileInfo in
-                    FileInfoView(fileInfo: fileInfo, delegate: self)
-                }.listRowInsets(EdgeInsets())
-            }.listStyle(PlainListStyle())
-       
+                List {
+                    ForEach(store.fileInfoList, id: \.id) { fileInfo in
+                        FileInfoView(fileInfo: fileInfo, delegate: self)
+                    }.listRowInsets(EdgeInsets())
+                }.listStyle(PlainListStyle())
+
             StatusView(statusText: $statusText)
                 .frame(height: 25)
         }
@@ -43,8 +43,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         .sheet(isPresented: $showingRenameSheet ) {
             showTextInputRenameSheet()
         }
-        .navigationTitle("File Name Fixer")
-        .frame(width: 800, height: 500)
+        .navigationTitle(getWindowTitleWithVersion())
     }
     
     func showTextInputRenameSheet() -> some View {
@@ -53,6 +52,11 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
             url = url.appendingPathComponent(textContent + "." + store.selectedForRename.fileInfo.destinationFileExtensionOnly)
             store.selectedForRename.fileInfo.destinationFileNameWithPathExtension = url.path
         }
+    }
+    
+    func getWindowTitleWithVersion() -> String {
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        return "File Name Fixer - Version \(appVersion!)"
     }
     
     func filePicker()

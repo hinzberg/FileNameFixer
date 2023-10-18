@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		3F400F0928B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */; };
 		3F7176122892DE7200391C7B /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7176112892DE7200391C7B /* FileHelper.swift */; };
+		3FA895412AE02E0A008FAFF3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA895402AE02E0A008FAFF3 /* Settings.swift */; };
+		3FA895442AE03371008FAFF3 /* UnwantedWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA895432AE03371008FAFF3 /* UnwantedWordView.swift */; };
+		3FB700B02AA7A5CA00167ED0 /* NavigationSideBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB700AF2AA7A5CA00167ED0 /* NavigationSideBarItem.swift */; };
+		3FB700B22AA7A5EA00167ED0 /* NavigationManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB700B12AA7A5EA00167ED0 /* NavigationManagerView.swift */; };
+		3FB700B42AA7A63E00167ED0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB700B32AA7A63E00167ED0 /* SettingsView.swift */; };
 		3FBA282528BD3C24002BC4F6 /* ContentViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA282428BD3C24002BC4F6 /* ContentViewStore.swift */; };
 		3FCA48522884903900809B82 /* FileNameFixerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA48512884903900809B82 /* FileNameFixerApp.swift */; };
 		3FCA48542884903900809B82 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA48532884903900809B82 /* ContentView.swift */; };
@@ -25,7 +30,12 @@
 /* Begin PBXFileReference section */
 		3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewActionDelegateProtocol.swift; sourceTree = "<group>"; };
 		3F7176112892DE7200391C7B /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
+		3FA895402AE02E0A008FAFF3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		3FA895432AE03371008FAFF3 /* UnwantedWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnwantedWordView.swift; sourceTree = "<group>"; };
 		3FADDA8A28A2EE6F0039D834 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3FB700AF2AA7A5CA00167ED0 /* NavigationSideBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationSideBarItem.swift; sourceTree = "<group>"; };
+		3FB700B12AA7A5EA00167ED0 /* NavigationManagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManagerView.swift; sourceTree = "<group>"; };
+		3FB700B32AA7A63E00167ED0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3FBA282428BD3C24002BC4F6 /* ContentViewStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewStore.swift; sourceTree = "<group>"; };
 		3FCA484E2884903900809B82 /* FileNameFixer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FileNameFixer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FCA48512884903900809B82 /* FileNameFixerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNameFixerApp.swift; sourceTree = "<group>"; };
@@ -52,6 +62,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3FA895422AE03347008FAFF3 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3FB700B32AA7A63E00167ED0 /* SettingsView.swift */,
+				3FA895402AE02E0A008FAFF3 /* Settings.swift */,
+				3FA895432AE03371008FAFF3 /* UnwantedWordView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		3FB700AE2AA7A5B900167ED0 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				3FB700B12AA7A5EA00167ED0 /* NavigationManagerView.swift */,
+				3FB700AF2AA7A5CA00167ED0 /* NavigationSideBarItem.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
 		3FCA48452884903900809B82 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +101,7 @@
 		3FCA48502884903900809B82 /* FileNameFixer */ = {
 			isa = PBXGroup;
 			children = (
+				3FB700AE2AA7A5B900167ED0 /* Sidebar */,
 				3F7176112892DE7200391C7B /* FileHelper.swift */,
 				3FCA48512884903900809B82 /* FileNameFixerApp.swift */,
 				3FCA48532884903900809B82 /* ContentView.swift */,
@@ -84,6 +114,7 @@
 				3FCFA10E28849C1C0083B63E /* FileInfoNameClearer.swift */,
 				3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */,
 				3FEC2ED128E9E18300D35D2D /* StatusView.swift */,
+				3FA895422AE03347008FAFF3 /* Settings */,
 			);
 			path = FileNameFixer;
 			sourceTree = "<group>";
@@ -176,12 +207,17 @@
 			files = (
 				3FCFA1092884969B0083B63E /* FileInfo.swift in Sources */,
 				3FCFA10F28849C1C0083B63E /* FileInfoNameClearer.swift in Sources */,
+				3FA895442AE03371008FAFF3 /* UnwantedWordView.swift in Sources */,
+				3FA895412AE02E0A008FAFF3 /* Settings.swift in Sources */,
 				3FEC2ED228E9E18300D35D2D /* StatusView.swift in Sources */,
+				3FB700B02AA7A5CA00167ED0 /* NavigationSideBarItem.swift in Sources */,
 				3FCA48542884903900809B82 /* ContentView.swift in Sources */,
 				3F400F0928B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift in Sources */,
 				3FCA48522884903900809B82 /* FileNameFixerApp.swift in Sources */,
 				3F7176122892DE7200391C7B /* FileHelper.swift in Sources */,
 				3FBA282528BD3C24002BC4F6 /* ContentViewStore.swift in Sources */,
+				3FB700B42AA7A63E00167ED0 /* SettingsView.swift in Sources */,
+				3FB700B22AA7A5EA00167ED0 /* NavigationManagerView.swift in Sources */,
 				3FCFA10D28849ACD0083B63E /* FileInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,7 +361,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.cocoa-coding.FileNameFixer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -354,7 +391,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.cocoa-coding.FileNameFixer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

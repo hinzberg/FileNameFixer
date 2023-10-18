@@ -66,7 +66,6 @@ public class FileInfoNameClearer {
                 textContent = newDate + textContent
             }
         }
-        
         self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
     }
     
