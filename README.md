@@ -1,5 +1,18 @@
 #  FileNameFixer
 
+Getting consistent file names for your own file can be a time-consuming task. 
+Especially if the files are downloaded from the Internet and contain unnecessary filler words. 
+Often dots are used instead of spaces or the upper and lower case are ignored. 
+This program will take care of this problem and renaming files will become a breeze. 
+
+## Features
+- Remove filler words
+- Replace dots with spaces
+- Capitalize words
+- Rearrange date to begiining of filename
+
+![Screenshot 1](https://github.com/hinzberg/FileNameFixer/blob/main/FileNameFixer/Screenshots/Screenshot%201.png)
+![Screenshot 2](https://github.com/hinzberg/FileNameFixer/blob/main/FileNameFixer/Screenshots/Screenshot%202.png)
 
 ## History
 
@@ -43,3 +56,4 @@
 ## ToDo
 - Refresh list after rename
 - Manual Rename TextField not big enough for long text, no text scroll
+- Setting: Replace Spaces with underscores
