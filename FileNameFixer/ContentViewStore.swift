@@ -11,7 +11,7 @@ public class SelectedInfo : ObservableObject {
     @Published var fileInfo  = FileInfo()
 }
 
-public class ContentViewStore :  RepositoryProtocol, ObservableObject
+public class ContentViewStore :  RepositoryProtocol, ObservableObject, Observable
 {
     public typealias RepositoryType = FileInfo
     
@@ -54,8 +54,9 @@ public class ContentViewStore :  RepositoryProtocol, ObservableObject
         fileInfoList.removeAll()
     }
     
-    func CleanFileNames() {
+    func CleanFileNames(unwantedWords : [UnwantedWord], setting : Settings)
+    {
         let clearer = FileInfoNameClearer(fileInfoList: self.fileInfoList)
-        clearer.clear()
+        clearer.clear(unwantedWords: unwantedWords, setting: setting)
     }
 }

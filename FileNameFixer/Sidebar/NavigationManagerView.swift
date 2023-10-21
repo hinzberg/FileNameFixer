@@ -3,8 +3,12 @@
 //  Created by Holger Hinzberg on 16.11.22.
 
 import SwiftUI
+import SwiftData
 
 struct NavigationManagerView: View {
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var settings : [Settings]
     
     var sideBarItems : [NavigationSideBarItem]
     init()
@@ -31,6 +35,12 @@ struct NavigationManagerView: View {
                 ContentView()
             case .settings:
                 SettingsView()
+            }
+        }
+        .onAppear {
+            // Create a Setting Entry if there is none
+            if settings.count == 0 {
+                modelContext.insert(Settings())
             }
         }
     }

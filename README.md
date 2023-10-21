@@ -1,5 +1,15 @@
 #  FileNameFixer
 
+
+## History
+
+### 2023-10-21
+- Added ContentUnavailableView
+
+### 2023-10-18 
+- New Settings View
+- Settings Migration to SwiftData
+
 ### 2023-09-05
 - Added Versionnumber to Title
 - List now total width of window
@@ -30,6 +40,6 @@
 - Remove item from list via a button in the row
 - Manual edit filename via sheet view
 
-#ToDo
+## ToDo
 - Refresh list after rename
 - Manual Rename TextField not big enough for long text, no text scroll

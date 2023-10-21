@@ -1,9 +1,6 @@
-//
 //  FileNameFixerApp.swift
 //  FileNameFixer
-//
 //  Created by Holger Hinzberg on 17.07.22.
-//
 
 import SwiftUI
 import SwiftData
@@ -11,6 +8,7 @@ import SwiftData
 @main
 struct FileNameFixerApp: App {
     
+    var contentViewStore = ContentViewStore()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Settings.self, UnwantedWord.self
@@ -30,5 +28,6 @@ struct FileNameFixerApp: App {
             NavigationManagerView()
         }
         .modelContainer(sharedModelContainer)
+        .environment(contentViewStore)
     }
 }

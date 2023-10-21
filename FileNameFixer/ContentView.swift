@@ -3,22 +3,41 @@
 //  Created by Holger Hinzberg on 17.07.22.
 
 import SwiftUI
+import SwiftData
 import Hinzberg_SwiftUI
 
 struct ContentView: View, FileInfoViewActionDelegateProtocol {
     
-    @ObservedObject var store = ContentViewStore()
+    @EnvironmentObject var store: ContentViewStore
     @State var showingRenameSheet = false
     @State var statusText : String = ""
-        
+    // SwiftData
+    @Environment(\.modelContext) private var modelContext
+    @Query private var unwantedWords : [UnwantedWord]
+    @Query private var settings : [Settings]
+    var setting: Settings? { settings.first }
+    
     var body: some View {
         VStack {
+            
+            if store.fileInfoList.count > 0 {
                 List {
                     ForEach(store.fileInfoList, id: \.id) { fileInfo in
                         FileInfoView(fileInfo: fileInfo, delegate: self)
                     }.listRowInsets(EdgeInsets())
                 }.listStyle(PlainListStyle())
-
+            } else {
+                ContentUnavailableView {
+                    Label("No files to rename", systemImage: "questionmark.folder")
+                } description: {
+                    Text("To get started select the first files")
+                } actions: {
+                    Button("Select Files") {
+                        filePicker()
+                    }.buttonStyle(.link)
+                }
+            }
+            
             StatusView(statusText: $statusText)
                 .frame(height: 25)
         }
@@ -26,17 +45,17 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         .toolbar (id: "main") {
             ToolbarItem(id: "files") {
                 Button(action: filePicker) {
-                    Label("Pick Files", systemImage: "folder.badge.plus")
+                    Label("Select Files", systemImage: "folder.badge.plus")
                 }
             }
             ToolbarItem(id: "rename") {
                 Button(action: rename) {
-                        Label("Rename", systemImage: "wand.and.stars")
+                    Label("Rename", systemImage: "wand.and.stars")
                 }
             }
             ToolbarItem(id: "cleanup") {
                 Button(action: clearList) {
-                        Label("Clear list", systemImage: "trash.fill")
+                    Label("Clear list", systemImage: "xmark.circle")
                 }
             }
         }
@@ -71,8 +90,8 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                 store.add(item: file)
             }
             
-            store.CleanFileNames()
-
+            store.CleanFileNames(unwantedWords: self.unwantedWords, setting: self.setting!)
+            
             if store.getCount() == 1 {
                 statusText = "One file selected"
             }

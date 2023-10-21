@@ -2,23 +2,45 @@
 //  FileInfoNameClearer
 //  Created by Holger Hinzberg on 17.07.22.
 
-import Foundation
+import SwiftUI
+import SwiftData
 
 public class FileInfoNameClearer {
+    
+    private var unwantedWords : [UnwantedWord]
+    private var setting:Settings
     
     var fileInfoList : [FileInfo]
     
     init (fileInfoList : [FileInfo])
     {
         self.fileInfoList = fileInfoList
+        self.unwantedWords = [UnwantedWord]()
+        self.setting = Settings()
     }
-
-    func clear()
+    
+    func clear(unwantedWords : [UnwantedWord], setting : Settings)
     {
+        self.unwantedWords = unwantedWords
+        self.setting = setting
+        
         for fileInfo in fileInfoList {
-            replaceDate(fileInfo: fileInfo)
-            removeUnwantedWords(fileInfo: fileInfo)
-            removeUnwantedCharacters(fileInfo: fileInfo)
+            
+            if setting.replaceDate {
+                replaceDate(fileInfo: fileInfo)
+            }
+            
+            if setting.replaceDots {
+                replaceDots(fileInfo: fileInfo)
+            }
+            
+            if setting.capitalizeWords {
+                capitalizeWords(fileInfo: fileInfo)
+            }
+            
+            if self.unwantedWords.count > 0 {
+                removeUnwantedWords(fileInfo: fileInfo)
+            }
         }
     }
     
@@ -26,30 +48,34 @@ public class FileInfoNameClearer {
     /// - Parameter fileInfo: FileInfo
     private func removeUnwantedWords(fileInfo : FileInfo)
     {
-        let unwantedWords = [".XXX", ".SD", "MP4-KLEENEX",".2160p","1080p","720p"]
         var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
-               
-        for word in unwantedWords {
-            textContent = textContent.replacingOccurrences(of: word, with: "")
+        
+        for unwantedWord in self.unwantedWords {
+            textContent = textContent.replacingOccurrences(of: unwantedWord.word, with: "")
         }
         
         self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
     }
-        
-    /// Remove unwanted characters from destination filename
+    
+    /// Replace dots and double dots from destination filename with spaces
     /// - Parameter fileInfo: FileInfo
-    private func removeUnwantedCharacters(fileInfo : FileInfo)
+    private func replaceDots(fileInfo : FileInfo)
     {
         var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
         
         textContent = textContent.replacingOccurrences(of: "..", with: ".")
         textContent = textContent.removeSuffix(".")
         textContent = textContent.replacingOccurrences(of: ".", with: " ")
-        textContent = textContent.capitalizeWords()
         
         self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
-   }
-        
+    }
+    
+    private func capitalizeWords(fileInfo : FileInfo) {
+        var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
+        textContent = textContent.capitalizeWords()
+        self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
+    }
+    
     ///  If a date is found in the filename it will be removed and added
     ///  to the front of the filename in a new format
     /// - Parameter fileInfo: FileInfo
@@ -75,7 +101,7 @@ public class FileInfoNameClearer {
         url = url.appendingPathComponent(newFileName + "." + fileInfo.destinationFileExtensionOnly)
         fileInfo.destinationFileNameWithPathExtension = url.path
     }
-        
+    
     /// Helper Function for RegEx
     /// - Parameters:
     ///   - regex: Regex to match for

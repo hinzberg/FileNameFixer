@@ -45,7 +45,7 @@ struct UnwantedWordView: View {
     }
     
     private func addWord() {
-        var word = UnwantedWord(word: word)
+        let word = UnwantedWord(word: word)
         modelContext.insert(word)
     }
 }

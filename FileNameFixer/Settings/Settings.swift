@@ -10,7 +10,9 @@ public class Settings {
     
     @Attribute(.unique) public var Id = UUID()
     public var replaceDate = true
-
+    public var replaceDots = true
+    public var capitalizeWords = true
+    
     init() {
     }
 }
