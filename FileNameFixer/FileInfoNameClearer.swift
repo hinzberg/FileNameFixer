@@ -52,6 +52,7 @@ public class FileInfoNameClearer {
         
         for unwantedWord in self.unwantedWords {
             textContent = textContent.replacingOccurrences(of: unwantedWord.word, with: "")
+            textContent = textContent.trim()
         }
         
         self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
@@ -66,6 +67,7 @@ public class FileInfoNameClearer {
         textContent = textContent.replacingOccurrences(of: "..", with: ".")
         textContent = textContent.removeSuffix(".")
         textContent = textContent.replacingOccurrences(of: ".", with: " ")
+        textContent = textContent.trim()
         
         self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
     }
@@ -73,6 +75,7 @@ public class FileInfoNameClearer {
     private func capitalizeWords(fileInfo : FileInfo) {
         var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
         textContent = textContent.capitalizeWords()
+        textContent = textContent.trim()
         self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
     }
     
