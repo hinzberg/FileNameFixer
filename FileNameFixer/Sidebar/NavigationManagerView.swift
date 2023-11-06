@@ -28,7 +28,7 @@ struct NavigationManagerView: View {
                 NavigationLink (value:  item.identifier) {
                     Label("\(item.displayText)", systemImage: item.imageName)
                 }
-            }
+            }.listStyle(.sidebar)
         } detail: {
             switch selectedIdentifier {
             case .fileList:

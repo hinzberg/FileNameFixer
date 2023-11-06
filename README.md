@@ -16,6 +16,9 @@ This program will take care of this problem and renaming files will become a bre
 
 ## History
 
+### 2023-11-06
+- Added translucent Sidebar
+
 ### 2023-10-21
 - Added ContentUnavailableView
 
