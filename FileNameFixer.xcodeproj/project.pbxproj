@@ -15,6 +15,7 @@
 		3FB700B22AA7A5EA00167ED0 /* NavigationManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB700B12AA7A5EA00167ED0 /* NavigationManagerView.swift */; };
 		3FB700B42AA7A63E00167ED0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB700B32AA7A63E00167ED0 /* SettingsView.swift */; };
 		3FBA282528BD3C24002BC4F6 /* ContentViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA282428BD3C24002BC4F6 /* ContentViewStore.swift */; };
+		3FC432392AFB486F0047C145 /* CleanupPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC432382AFB486F0047C145 /* CleanupPanelView.swift */; };
 		3FCA48522884903900809B82 /* FileNameFixerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA48512884903900809B82 /* FileNameFixerApp.swift */; };
 		3FCA48542884903900809B82 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA48532884903900809B82 /* ContentView.swift */; };
 		3FCA48562884903C00809B82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA48552884903C00809B82 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		3FB700B12AA7A5EA00167ED0 /* NavigationManagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManagerView.swift; sourceTree = "<group>"; };
 		3FB700B32AA7A63E00167ED0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3FBA282428BD3C24002BC4F6 /* ContentViewStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewStore.swift; sourceTree = "<group>"; };
+		3FC432382AFB486F0047C145 /* CleanupPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupPanelView.swift; sourceTree = "<group>"; };
 		3FCA484E2884903900809B82 /* FileNameFixer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FileNameFixer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FCA48512884903900809B82 /* FileNameFixerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNameFixerApp.swift; sourceTree = "<group>"; };
 		3FCA48532884903900809B82 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				3FB700B32AA7A63E00167ED0 /* SettingsView.swift */,
 				3FA895402AE02E0A008FAFF3 /* Settings.swift */,
 				3FA895432AE03371008FAFF3 /* UnwantedWordView.swift */,
+				3FC432382AFB486F0047C145 /* CleanupPanelView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				3FCA48522884903900809B82 /* FileNameFixerApp.swift in Sources */,
 				3F7176122892DE7200391C7B /* FileHelper.swift in Sources */,
 				3FBA282528BD3C24002BC4F6 /* ContentViewStore.swift in Sources */,
+				3FC432392AFB486F0047C145 /* CleanupPanelView.swift in Sources */,
 				3FB700B42AA7A63E00167ED0 /* SettingsView.swift in Sources */,
 				3FB700B22AA7A5EA00167ED0 /* NavigationManagerView.swift in Sources */,
 				3FCFA10D28849ACD0083B63E /* FileInfoView.swift in Sources */,
@@ -368,7 +372,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"FileNameFixer/Preview Content\"";
-				DEVELOPMENT_TEAM = Q4JYUA6UF4;
+				DEVELOPMENT_TEAM = 689286JZWP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -398,7 +402,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"FileNameFixer/Preview Content\"";
-				DEVELOPMENT_TEAM = Q4JYUA6UF4;
+				DEVELOPMENT_TEAM = 689286JZWP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

@@ -24,8 +24,16 @@ public class FileInfoNameClearer {
         self.unwantedWords = unwantedWords
         self.setting = setting
         
+        if setting.doCleanup {
+            doCleanup()
+        }
+               
+
+    }
+    
+    private func doCleanup() {
+        
         for fileInfo in fileInfoList {
-            
             if setting.replaceDate {
                 replaceDate(fileInfo: fileInfo)
             }
@@ -43,6 +51,15 @@ public class FileInfoNameClearer {
             }
         }
     }
+    
+    private func doPrefixes() {
+        
+    }
+        
+    private func doSuffixes() {
+        
+    }
+    
     
     /// Remove unwanted Words from Destination Filename
     /// - Parameter fileInfo: FileInfo
