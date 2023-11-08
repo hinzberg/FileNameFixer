@@ -7,9 +7,20 @@ import SwiftData
 
 struct SettingsView: View {
     var body: some View {
-        VStack {
+        HStack {
             CleanupPanelView()
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+            PrefixesPanelView()
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+            SuffixesPanelView()
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
         }
+        .navigationTitle(getWindowTitleWithVersion())
+    }
+    
+    func getWindowTitleWithVersion() -> String {
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        return "File Name Fixer - Version \(appVersion!)"
     }
 }
 

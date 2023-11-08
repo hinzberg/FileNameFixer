@@ -11,7 +11,7 @@ struct FileNameFixerApp: App {
     var contentViewStore = ContentViewStore()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Settings.self, UnwantedWord.self
+            Settings.self, UnwantedWord.self, Prefix.self, Suffix.self
         ])
         
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)

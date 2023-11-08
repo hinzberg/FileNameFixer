@@ -1,4 +1,4 @@
-//  SettingsPanelView.swift
+//  CleanupPanelView.swift
 //  FileNameFixer
 //  Created by Holger Hinzberg on 08.11.23.
 
@@ -43,11 +43,12 @@ struct CleanupPanelView: View {
                 
         VStack {
             
-            Text("Filename cleanup")
-                .font(.title)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            VStack {
+                Text("Cleanup")
+                    .font(.title)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
-                        
+                 
             Toggle("Do Cleanup", isOn:  doCleanupProxy  )
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
@@ -68,33 +69,45 @@ struct CleanupPanelView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
                 .disabled(!cleanupEnabledProxy)
+                
+                Spacer()
+            }.frame(maxWidth: .infinity, minHeight: 170 , maxHeight: 170)
             
             HStack{
-                Button("Add Word", action: {  showingAddSheet.toggle()  })
-                Button("Remove Selected", action: {  removeSelectedWords()  })
-                Spacer()
+                Button {
+                    showingAddSheet.toggle()
+                } label: {
+                    Text("Add Word")
+                        .frame(maxWidth: .infinity)
+                }
+                
+                Button {
+                    removeSelectedWords()
+                } label: {
+                    Text("Remove Selected")
+                        .frame(maxWidth: .infinity)
+                }
             }
-            .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
             .disabled(!cleanupEnabledProxy)
             
             Table(unwantedWords, selection: $selected ) {
                 TableColumn("Unwanted Words", value: \.word)
-                    .width(min: 150, max: 300)
+                    .width(min: 100, max: 100)
             }
-            .padding(EdgeInsets(top: 15, leading: 15, bottom: 10, trailing: 15))
-            .tableStyle(.inset)
+              .tableStyle(.inset)
             .disabled(!cleanupEnabledProxy)
             
             Spacer()
         }
-        .navigationTitle(getWindowTitleWithVersion())
+        
         .sheet(isPresented: $showingAddSheet ) {
             showAddWordSheet()
         }
     }
     
     func showAddWordSheet() -> some View {
-        return UnwantedWordView()
+        return AddUnwantedWordSheetWindow()
     }
     
     func removeSelectedWords() {
@@ -105,10 +118,7 @@ struct CleanupPanelView: View {
         }
     }
     
-    func getWindowTitleWithVersion() -> String {
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-        return "File Name Fixer - Version \(appVersion!)"
-    }
+
 }
 
 #Preview {

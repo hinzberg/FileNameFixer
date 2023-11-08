@@ -1,14 +1,16 @@
-//  UnwantedWordView.swift
+//  AddPrefixSheetWindow.swift
 //  FileNameFixer
-//  Created by Holger Hinzberg on 18.10.23.
-import SwiftUI
+//  Created by Holger Hinzberg on 08.11.23.
 
-enum UnwantedWordViewWindowSize {
+import SwiftUI
+import SwiftData
+
+enum AddPrefixSheetWindowSize {
     static let min = CGSize(width: 450, height: 120)
     static let max = CGSize(width: 450, height: 120)
 }
 
-struct UnwantedWordView: View {
+struct AddPrefixSheetWindow: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
@@ -16,7 +18,7 @@ struct UnwantedWordView: View {
     
     var body: some View {
         VStack {
-            Text("Add an unwanted word")
+            Text("Add Prefix")
                 .foregroundColor(Color.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
@@ -27,29 +29,29 @@ struct UnwantedWordView: View {
             HStack {
                 Spacer()
                 
-                Button("Cancel") { 
+                Button("Cancel") {
                     self.presentationMode.wrappedValue.dismiss()
                 }
                     .keyboardShortcut(.cancelAction)
                 
-                Button("Submit") { 
+                Button("Submit") {
                     self.presentationMode.wrappedValue.dismiss()
-                     addWord()
+                     addPrefix()
                 }
                 .keyboardShortcut(.defaultAction)
             }
             .padding(EdgeInsets(top: 0, leading: 15, bottom: 15, trailing: 15))
         }
-        .frame(minWidth: UnwantedWordViewWindowSize.min.width, minHeight: UnwantedWordViewWindowSize.min.height)
-        .frame(maxWidth: UnwantedWordViewWindowSize.max.width, maxHeight: UnwantedWordViewWindowSize.max.height)
+        .frame(minWidth: AddPrefixSheetWindowSize.min.width, minHeight: AddPrefixSheetWindowSize.min.height)
+        .frame(maxWidth: AddPrefixSheetWindowSize.max.width, maxHeight: AddPrefixSheetWindowSize.max.height)
     }
     
-    private func addWord() {
-        let word = UnwantedWord(word: word)
+    private func addPrefix() {
+        let word = Prefix(word: word)
         modelContext.insert(word)
     }
 }
 
 #Preview {
-    UnwantedWordView()
+    AddPrefixSheetWindow()
 }

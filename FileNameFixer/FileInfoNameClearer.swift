@@ -27,8 +27,14 @@ public class FileInfoNameClearer {
         if setting.doCleanup {
             doCleanup()
         }
-               
-
+        
+        if setting.addPrefixes {
+            doPrefixes()
+        }
+        
+        if setting.addSuffixes {
+            doSuffixes()
+        }
     }
     
     private func doCleanup() {
@@ -59,8 +65,7 @@ public class FileInfoNameClearer {
     private func doSuffixes() {
         
     }
-    
-    
+        
     /// Remove unwanted Words from Destination Filename
     /// - Parameter fileInfo: FileInfo
     private func removeUnwantedWords(fileInfo : FileInfo)
