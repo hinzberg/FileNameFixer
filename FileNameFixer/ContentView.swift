@@ -14,6 +14,8 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     // SwiftData
     @Environment(\.modelContext) private var modelContext
     @Query private var unwantedWords : [UnwantedWord]
+    @Query private var prefixes : [Prefix]
+    @Query private var suffixes : [Suffix]
     @Query private var settings : [Settings]
     var setting: Settings? { settings.first }
     
@@ -90,7 +92,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                 store.add(item: file)
             }
             
-            store.CleanFileNames(unwantedWords: self.unwantedWords, setting: self.setting!)
+            store.CleanFileNames(unwantedWords: self.unwantedWords, prefixes: prefixes, suffixes: suffixes, setting: self.setting!)
             
             if store.getCount() == 1 {
                 statusText = "One file selected"

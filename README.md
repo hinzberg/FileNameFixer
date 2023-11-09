@@ -16,6 +16,9 @@ This program will take care of this problem and renaming files will become a bre
 
 ## History
 
+### 2023-11-09
+- Add Prefixes and Suffixes to Filename
+
 ### 2023-11-08
 - Created PrefixPanelView for Settings
 - Created Suffix PanelView for Settings

@@ -8,6 +8,8 @@ import SwiftData
 public class FileInfoNameClearer {
     
     private var unwantedWords : [UnwantedWord]
+    private var prefixes : [Prefix]
+    private var suffixes : [Suffix]
     private var setting:Settings
     
     var fileInfoList : [FileInfo]
@@ -16,23 +18,27 @@ public class FileInfoNameClearer {
     {
         self.fileInfoList = fileInfoList
         self.unwantedWords = [UnwantedWord]()
+        self.prefixes = [Prefix]()
+        self.suffixes =  [Suffix]()
         self.setting = Settings()
     }
     
-    func clear(unwantedWords : [UnwantedWord], setting : Settings)
+    func clear(unwantedWords : [UnwantedWord], prefixes : [Prefix], suffixes : [Suffix], setting : Settings)
     {
         self.unwantedWords = unwantedWords
+        self.prefixes = prefixes
+        self.suffixes = suffixes
         self.setting = setting
         
         if setting.doCleanup {
             doCleanup()
         }
         
-        if setting.addPrefixes {
+        if setting.addPrefixes && prefixes.count > 0 {
             doPrefixes()
         }
         
-        if setting.addSuffixes {
+        if setting.addSuffixes && suffixes.count > 0 {
             doSuffixes()
         }
     }
@@ -58,14 +64,65 @@ public class FileInfoNameClearer {
         }
     }
     
-    private func doPrefixes() {
-        
-    }
-        
     private func doSuffixes() {
         
+        for fileInfo in fileInfoList {
+            
+            var activeSuffixes = [Suffix]()
+            
+            if setting.randomlyChooseSuffix {
+                activeSuffixes.append(self.suffixes.randomElement()!)
+            }
+            else {
+                activeSuffixes.append(contentsOf: self.suffixes)
+            }
+            
+            var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
+            
+            if setting.insertSpaceBetweenSuffixesAndFilenames {
+                textContent = textContent + " "
+            }
+                        
+            for activeSuffix in activeSuffixes {
+                textContent = textContent + activeSuffix.word + " "
+            }
+            
+            textContent = textContent.trim()
+            self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
+        }
     }
         
+    private func doPrefixes() {
+        
+        for fileInfo in fileInfoList {
+            
+            var activePrefixes = [Prefix]()
+            
+            if setting.randomlyChoosePrefix {
+                activePrefixes.append(self.prefixes.randomElement()!)
+            }
+            else {
+                activePrefixes.append(contentsOf: self.prefixes)
+            }
+            
+            var joinedPrefixes : String = ""
+            for activePrefix in activePrefixes {
+                joinedPrefixes = activePrefix.word + " " + joinedPrefixes
+            }
+            
+            var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
+            
+            if setting.insertSpaceBetweenPrefixesAndFilenames {
+                textContent =  joinedPrefixes.trim() + " " +  textContent
+            }
+            else {
+                textContent =  joinedPrefixes.trim() +   textContent
+            }
+                        
+            self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
+        }
+    }
+    
     /// Remove unwanted Words from Destination Filename
     /// - Parameter fileInfo: FileInfo
     private func removeUnwantedWords(fileInfo : FileInfo)
