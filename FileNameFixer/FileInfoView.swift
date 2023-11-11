@@ -25,10 +25,7 @@ struct FileInfoView: View {
                     Spacer()
                 }
             }
-            .onTapGesture {
-                fileInfo.selected.toggle()
-            }
-            
+
             Spacer()
             
             HStack {
@@ -38,7 +35,7 @@ struct FileInfoView: View {
                     Image(systemName: "text.quote")
                         .resizable()
                         .frame(width: 20, height: 20, alignment: .center)
-                        .foregroundColor(.accentColor)
+                        .foregroundColor(.primary)
                 }  .buttonStyle(.borderless)
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10))
                 
@@ -53,23 +50,8 @@ struct FileInfoView: View {
             }
         }
         .padding(3)
-        .background(fileInfo.selected ? Color.accentColor.opacity(0.1) : Color(NSColor.controlBackgroundColor) )
-        .onTapGesture {
-            fileInfo.selected.toggle()
-        }
-    }
+	    }
 }
-
-/*
-struct FileInfoView_Previews: PreviewProvider {
-    
-    @Binding var fileInfo : FileInfo
-    
-    static var previews: some View {
-        FileInfoView(fileInfo: fileInfo ,delegate: nil)
-    }
-}
-*/
 
 struct Previews_FileInfoView_Previews: PreviewProvider {
     static var previews: some View {

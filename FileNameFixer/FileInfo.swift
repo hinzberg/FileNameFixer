@@ -4,7 +4,7 @@
 
 import Foundation
 
-public class FileInfo : Equatable, Identifiable, ObservableObject
+public class FileInfo : Equatable, Identifiable, Hashable, ObservableObject
 {
     public var id = UUID()
     @Published var selected : Bool = false
@@ -71,5 +71,9 @@ public class FileInfo : Equatable, Identifiable, ObservableObject
     
     public static func ==(lhs: FileInfo, rhs: FileInfo) -> Bool {
         return lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
     }
 }

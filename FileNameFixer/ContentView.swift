@@ -11,6 +11,9 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     @EnvironmentObject var store: ContentViewStore
     @State var showingRenameSheet = false
     @State var statusText : String = ""
+    @State private var isShowingInspector : Bool = false
+    @State private var selection : FileInfo?
+    
     // SwiftData
     @Environment(\.modelContext) private var modelContext
     @Query private var unwantedWords : [UnwantedWord]
@@ -23,11 +26,14 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         VStack {
             
             if store.fileInfoList.count > 0 {
-                List {
-                    ForEach(store.fileInfoList, id: \.id) { fileInfo in
-                        FileInfoView(fileInfo: fileInfo, delegate: self)
-                    }.listRowInsets(EdgeInsets())
-                }.listStyle(PlainListStyle())
+                List (store.fileInfoList, id: \.self, selection: $selection) { fileInfo in
+                    FileInfoView(fileInfo: fileInfo, delegate: self)
+                        .tag(fileInfo)
+                       .listRowInsets(EdgeInsets())
+                       .listRowSeparator(.hidden)
+                }
+                .listStyle(PlainListStyle())
+                	
             } else {
                 ContentUnavailableView {
                     Label("No files to rename", systemImage: "questionmark.folder")
@@ -43,7 +49,6 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
             StatusView(statusText: $statusText)
                 .frame(height: 25)
         }
-        
         .toolbar (id: "main") {
             ToolbarItem(id: "files") {
                 Button(action: filePicker) {
@@ -60,9 +65,19 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                     Label("Clear list", systemImage: "xmark.circle")
                 }
             }
+            ToolbarItem(id: "inspector") {
+                Button(action: { isShowingInspector.toggle() } ) {
+                    Label("Inspector", systemImage: "sidebar.trailing")
+                }
+            }
         }
         .sheet(isPresented: $showingRenameSheet ) {
             showTextInputRenameSheet()
+        }
+        .inspector(isPresented: $isShowingInspector ) {
+            InspectorView(fileInfo: $selection)
+                .inspectorColumnWidth(min: 150, ideal: 150, max: 300)
+                .interactiveDismissDisabled()
         }
         .navigationTitle(getWindowTitleWithVersion())
     }
@@ -92,7 +107,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                 store.add(item: file)
             }
             
-            store.CleanFileNames(unwantedWords: self.unwantedWords, prefixes: prefixes, suffixes: suffixes, setting: self.setting!)
+            store.createNewFilenames(unwantedWords: self.unwantedWords, prefixes: prefixes, suffixes: suffixes, setting: self.setting!)
             
             if store.getCount() == 1 {
                 statusText = "One file selected"

@@ -23,7 +23,7 @@ public class FileInfoNameClearer {
         self.setting = Settings()
     }
     
-    func clear(unwantedWords : [UnwantedWord], prefixes : [Prefix], suffixes : [Suffix], setting : Settings)
+    func createNewFilenames(unwantedWords : [UnwantedWord], prefixes : [Prefix], suffixes : [Suffix], setting : Settings)
     {
         self.unwantedWords = unwantedWords
         self.prefixes = prefixes

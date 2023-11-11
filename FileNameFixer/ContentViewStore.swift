@@ -54,9 +54,9 @@ public class ContentViewStore :  RepositoryProtocol, ObservableObject, Observabl
         fileInfoList.removeAll()
     }
     
-    func CleanFileNames(unwantedWords : [UnwantedWord], prefixes : [Prefix], suffixes : [Suffix],  setting : Settings)
+    func createNewFilenames(unwantedWords : [UnwantedWord], prefixes : [Prefix], suffixes : [Suffix],  setting : Settings)
     {
         let clearer = FileInfoNameClearer(fileInfoList: self.fileInfoList)
-        clearer.clear(unwantedWords: unwantedWords, prefixes: prefixes, suffixes: suffixes, setting: setting)
+        clearer.createNewFilenames(unwantedWords: unwantedWords, prefixes: prefixes, suffixes: suffixes, setting: setting)
     }
 }

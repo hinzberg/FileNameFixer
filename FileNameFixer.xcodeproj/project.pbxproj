@@ -11,6 +11,8 @@
 		3F095F282AFC1B9F00D0F5DF /* AddSuffixSheetWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F095F272AFC1B9F00D0F5DF /* AddSuffixSheetWindow.swift */; };
 		3F400F0928B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */; };
 		3F7176122892DE7200391C7B /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7176112892DE7200391C7B /* FileHelper.swift */; };
+		3F74531B2AFFCC0800FDB259 /* VisualEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F74531A2AFFCC0800FDB259 /* VisualEffectsView.swift */; };
+		3F74531D2AFFD5AB00FDB259 /* InspectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F74531C2AFFD5AB00FDB259 /* InspectorView.swift */; };
 		3FA895412AE02E0A008FAFF3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA895402AE02E0A008FAFF3 /* Settings.swift */; };
 		3FA895442AE03371008FAFF3 /* AddUnwantedWordSheetWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA895432AE03371008FAFF3 /* AddUnwantedWordSheetWindow.swift */; };
 		3FB700B02AA7A5CA00167ED0 /* NavigationSideBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB700AF2AA7A5CA00167ED0 /* NavigationSideBarItem.swift */; };
@@ -37,6 +39,8 @@
 		3F095F272AFC1B9F00D0F5DF /* AddSuffixSheetWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSuffixSheetWindow.swift; sourceTree = "<group>"; };
 		3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewActionDelegateProtocol.swift; sourceTree = "<group>"; };
 		3F7176112892DE7200391C7B /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
+		3F74531A2AFFCC0800FDB259 /* VisualEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectsView.swift; sourceTree = "<group>"; };
+		3F74531C2AFFD5AB00FDB259 /* InspectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorView.swift; sourceTree = "<group>"; };
 		3FA895402AE02E0A008FAFF3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3FA895432AE03371008FAFF3 /* AddUnwantedWordSheetWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUnwantedWordSheetWindow.swift; sourceTree = "<group>"; };
 		3FAC3B632AE392D200F117AC /* Screenshot 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 1.png"; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				3FCA48552884903C00809B82 /* Assets.xcassets */,
 				3FCA485A2884903C00809B82 /* FileNameFixer.entitlements */,
 				3FCA48572884903C00809B82 /* Preview Content */,
+				3F74531A2AFFCC0800FDB259 /* VisualEffectsView.swift */,
+				3F74531C2AFFD5AB00FDB259 /* InspectorView.swift */,
 			);
 			path = FileNameFixer;
 			sourceTree = "<group>";
@@ -249,6 +255,8 @@
 				3FC432392AFB486F0047C145 /* CleanupPanelView.swift in Sources */,
 				3FC4323D2AFB516F0047C145 /* AddPrefixSheetWindow.swift in Sources */,
 				3FB700B42AA7A63E00167ED0 /* SettingsView.swift in Sources */,
+				3F74531B2AFFCC0800FDB259 /* VisualEffectsView.swift in Sources */,
+				3F74531D2AFFD5AB00FDB259 /* InspectorView.swift in Sources */,
 				3FB700B22AA7A5EA00167ED0 /* NavigationManagerView.swift in Sources */,
 				3FCFA10D28849ACD0083B63E /* FileInfoView.swift in Sources */,
 			);
