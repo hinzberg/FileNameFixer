@@ -1,5 +1,4 @@
 //  NavigationManagerView.swift
-//  PictureDownloader
 //  Created by Holger Hinzberg on 16.11.22.
 
 import SwiftUI

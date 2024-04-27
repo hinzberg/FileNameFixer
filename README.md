@@ -16,6 +16,9 @@ This program will take care of this problem and renaming files will become a bre
 
 ## History
 
+### 2024-04-27
+- Text adapted for dark mode
+
 ### 2023-11-09
 - Add Prefixes and Suffixes to Filename
 

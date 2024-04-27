@@ -12,7 +12,7 @@ struct StatusView: View {
         VStack{
             Text(statusText)
                         .font(.body)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
             Spacer()
         }
     }

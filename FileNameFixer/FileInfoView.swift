@@ -15,7 +15,7 @@ struct FileInfoView: View {
                 HStack {
                     Text(fileInfo.currentFileNameOnly)
                         .font(.title2)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                     Spacer()
                 }
                 HStack {
