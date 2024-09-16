@@ -6,7 +6,7 @@ import SwiftUI
 
 struct FileInfoView: View {
 
-    @ObservedObject var fileInfo : FileInfo
+    @State var fileInfo : FileInfo
     var delegate : FileInfoViewActionDelegateProtocol?
     
     var body: some View {
@@ -32,7 +32,7 @@ struct FileInfoView: View {
                 Button {
                     delegate?.edit(fileInfo: self.fileInfo)
                 } label: {
-                    Image(systemName: "text.quote")
+                    Image(systemName: "highlighter")
                         .resizable()
                         .frame(width: 20, height: 20, alignment: .center)
                         .foregroundColor(.primary)
@@ -61,6 +61,6 @@ struct Previews_FileInfoView_Previews: PreviewProvider {
 
 struct Previews_FileInfoView_Previews_2: PreviewProvider {
     static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+        Text("Hello, World!")
     }
 }

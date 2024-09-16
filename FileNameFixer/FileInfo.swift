@@ -3,15 +3,17 @@
 //  Created by Holger Hinzberg on 17.07.22.
 
 import Foundation
+import Observation
 
-public class FileInfo : Equatable, Identifiable, Hashable, ObservableObject
+@Observable
+public class FileInfo : Equatable, Identifiable, Hashable
 {
     public var id = UUID()
-    @Published var selected : Bool = false
+    var selected : Bool = false
     
     // MARK: Current File
     
-    @Published public var currentFileNameWithPathAndExtension : String = ""
+    public var currentFileNameWithPathAndExtension : String = ""
     
     public var currentFileNameOnly : String {
         let file: NSString =  NSString(string: currentFileNameWithPathAndExtension)
@@ -39,7 +41,7 @@ public class FileInfo : Equatable, Identifiable, Hashable, ObservableObject
         
     // MARK: Destination File
        
-    @Published public var destinationFileNameWithPathExtension : String  = ""
+    public var destinationFileNameWithPathExtension : String  = ""
    
     public var destinationFileNameOnly : String {
         let filename: NSString = NSString(string: destinationFileNameWithPathExtension)

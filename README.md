@@ -16,6 +16,9 @@ This program will take care of this problem and renaming files will become a bre
 
 ## History
 
+### 2024-09-16
+- Changed ObservableObject to @Observable
+
 ### 2024-04-27
 - Text adapted for dark mode
 

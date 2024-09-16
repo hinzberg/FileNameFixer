@@ -12,7 +12,7 @@ struct InspectorView: View {
     @Binding var fileInfo : FileInfo?
     
     var body: some View {
-        Text("Hallo \(fileInfo?.destinationFileNameOnlyWithOutExtension ?? "Nothing")")
+        Text("\(fileInfo?.destinationFileNameOnlyWithOutExtension ?? "Nothing")")
     }
 }
 
