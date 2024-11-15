@@ -25,6 +25,11 @@ public class ContentViewStore :  RepositoryProtocol, ObservableObject
         return fileInfoList.count
     }
     
+    public func getFilesPreparedForRenameCount() -> Int
+    {
+        return fileInfoList.filter{ $0.currentAndDestinationNameAreTheSame == false }.count
+    }
+          
     public func add(item: FileInfo) -> Void {
         fileInfoList.append(item)
     }

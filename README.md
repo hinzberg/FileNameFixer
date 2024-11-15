@@ -16,6 +16,9 @@ This program will take care of this problem and renaming files will become a bre
 
 ## History
 
+### 2024-11-15
+- In the Statusbar also the number of files to be renamed will be shown
+
 ### 2024-09-16
 - Changed ObservableObject to @Observable
 

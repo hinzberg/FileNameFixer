@@ -42,6 +42,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                 } actions: {
                     Button("Select Files") {
                         filePicker()
+                        updateStatusText()
                     }.buttonStyle(.link)
                 }
             }
@@ -51,7 +52,10 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         }
         .toolbar (id: "main") {
             ToolbarItem(id: "files") {
-                Button(action: filePicker) {
+                Button {
+                    filePicker()
+                    updateStatusText()
+                }  label: {
                     Label("Select Files", systemImage: "folder.badge.plus")
                 }
             }
@@ -82,11 +86,13 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         .navigationTitle(getWindowTitleWithVersion())
     }
     
+    /// Will open a sheet to rename the selected file
     func showTextInputRenameSheet() -> some View {
         return TextInputView(defaultText: store.selectedForRename.fileName) { textContent in
             var url = URL(fileURLWithPath: store.selectedForRename.fileInfo.currentFilePathOnly)
             url = url.appendingPathComponent(textContent + "." + store.selectedForRename.fileInfo.destinationFileExtensionOnly)
             store.selectedForRename.fileInfo.destinationFileNameWithPathExtension = url.path
+            updateStatusText()
         }
     }
     
@@ -106,21 +112,36 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                 let file = FileInfo(currentFileNameWithPathAndExtension: url.path, destinationFileNameWithPathAndExtension: url.path)
                 store.add(item: file)
             }
-            
             store.createNewFilenames(unwantedWords: self.unwantedWords, prefixes: prefixes, suffixes: suffixes, setting: self.setting!)
-            
-            if store.getCount() == 1 {
-                statusText = "One file selected"
-            }
-            else if store.getCount() > 0 {
-                statusText = "\(store.getCount()) files selected"
-            }
-            else {
-                statusText = "No file selected"
-            }
         }
     }
     
+    func updateStatusText()
+    {
+        let totalCount = store.getCount()
+        let differentNameCount = store.getFilesPreparedForRenameCount()
+        var status = ""
+        
+        if totalCount == 1 {
+            status = "One file selected"
+        }
+        else if totalCount > 0 {
+            status = "\(totalCount) files selected"
+        }
+        else {
+            status = "No file selected"
+        }
+        
+        if differentNameCount == 1 {
+            status += " - One file to rename"
+        }
+        else if differentNameCount > 0 {
+            status += " - \(differentNameCount) files to rename"
+        }
+        
+        statusText = status
+    }
+        
     func rename()
     {
         var renamedCounter = 0
@@ -152,13 +173,19 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         statusText = ""
     }
     
+    ///  Remove the item from the store. Is called as a delegate from an FileInfoView
+    /// - Parameter fileInfo
     func remove(fileInfo: FileInfo) {
         store.remove(item: fileInfo)
+        updateStatusText()
     }
     
+    ///  Rename the item. Is called as a delegate from an FileInfoView
+    /// - Parameter fileInfo
     func edit(fileInfo: FileInfo) {
         store.selectedForRename.fileInfo = fileInfo
         
+        // Use the original file name or is there already a new file name set?
         if fileInfo.currentFileNameOnly == fileInfo.destinationFileNameOnlyWithOutExtension {
             store.selectedForRename.fileName = fileInfo.currentFileNameOnly
         } else {
@@ -167,6 +194,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         showingRenameSheet.toggle()
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
