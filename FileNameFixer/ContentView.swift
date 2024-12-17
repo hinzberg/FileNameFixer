@@ -11,7 +11,6 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     @EnvironmentObject var store: ContentViewStore
     @State var showingRenameSheet = false
     @State var statusText : String = ""
-    @State private var isShowingInspector : Bool = false
     @State private var selection : FileInfo?
     
     // SwiftData
@@ -20,20 +19,33 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     @Query private var prefixes : [Prefix]
     @Query private var suffixes : [Suffix]
     @Query private var settings : [Settings]
-    var setting: Settings? { settings.first }
+    @Query private var appconfig : [AppConfig]
     
     var body: some View {
+        
+        var isShowingInspector :Bool {
+            get { return self.appconfig.first!.isShowingInspector }
+            set {  self.appconfig.first!.isShowingInspector = newValue  }
+        }
+        
+        var isShowingInspectorBinding : Binding<Bool> {
+            Binding (
+                get: { return isShowingInspector },
+                set: {  isShowingInspector = $0  }
+            )
+        }
+        
         VStack {
             
             if store.fileInfoList.count > 0 {
                 List (store.fileInfoList, id: \.self, selection: $selection) { fileInfo in
                     FileInfoView(fileInfo: fileInfo, delegate: self)
                         .tag(fileInfo)
-                       .listRowInsets(EdgeInsets())
-                       .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets())
+                        .listRowSeparator(.hidden)
                 }
                 .listStyle(PlainListStyle())
-                	
+                
             } else {
                 ContentUnavailableView {
                     Label("No files to rename", systemImage: "questionmark.folder")
@@ -70,7 +82,9 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                 }
             }
             ToolbarItem(id: "inspector") {
-                Button(action: { isShowingInspector.toggle() } ) {
+                Button(action: {
+                    isShowingInspector.toggle()
+                } ) {
                     Label("Inspector", systemImage: "sidebar.trailing")
                 }
             }
@@ -78,7 +92,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         .sheet(isPresented: $showingRenameSheet ) {
             showTextInputRenameSheet()
         }
-        .inspector(isPresented: $isShowingInspector ) {
+        .inspector(isPresented: isShowingInspectorBinding) {
             InspectorView(fileInfo: $selection)
                 .inspectorColumnWidth(min: 150, ideal: 150, max: 300)
                 .interactiveDismissDisabled()
@@ -112,7 +126,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                 let file = FileInfo(currentFileNameWithPathAndExtension: url.path, destinationFileNameWithPathAndExtension: url.path)
                 store.add(item: file)
             }
-            store.createNewFilenames(unwantedWords: self.unwantedWords, prefixes: prefixes, suffixes: suffixes, setting: self.setting!)
+            store.createNewFilenames(unwantedWords: self.unwantedWords, prefixes: self.prefixes, suffixes: self.suffixes, setting: self.settings.first!)
         }
     }
     
@@ -141,7 +155,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         
         statusText = status
     }
-        
+    
     func rename()
     {
         var renamedCounter = 0

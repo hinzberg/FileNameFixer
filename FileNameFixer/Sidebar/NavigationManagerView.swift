@@ -8,6 +8,7 @@ struct NavigationManagerView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Query private var settings : [Settings]
+    @Query private var config : [AppConfig]
     
     var sideBarItems : [NavigationSideBarItem]
     init()
@@ -34,12 +35,7 @@ struct NavigationManagerView: View {
                 ContentView()
             case .settings:
                 SettingsView()
-            }
-        }
-        .onAppear {
-            // Create a Setting Entry if there is none
-            if settings.count == 0 {
-                modelContext.insert(Settings())
+                    .background(VisualEffectView())
             }
         }
     }
