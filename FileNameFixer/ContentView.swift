@@ -115,6 +115,8 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         return "File Name Fixer - Version \(appVersion!)"
     }
     
+    // MARK: File Picker
+    
     func filePicker()
     {
         let panel = NSOpenPanel()
@@ -156,6 +158,8 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         statusText = status
     }
     
+    // MARK: Rename
+    
     func rename()
     {
         var renamedCounter = 0
@@ -166,8 +170,13 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         {
             print("From : \(info.currentFileNameWithPathAndExtension)")
             print("To : \(info.destinationFileNameWithPathExtension)")
-            _ = fileHelper.moveItemAtPath(sourcePath: info.currentFileNameWithPathAndExtension, toPath: info.destinationFileNameWithPathExtension)
-            renamedCounter = renamedCounter + 1
+            let renameSuccessful = fileHelper.moveItemAtPath(sourcePath: info.currentFileNameWithPathAndExtension, toPath: info.destinationFileNameWithPathExtension)
+            let newFilenameFound = fileHelper.checkIfFileDoesExists(file: info.destinationFileNameWithPathExtension)
+            
+            if renameSuccessful && newFilenameFound {
+                info.Update();
+                renamedCounter = renamedCounter + 1
+            }
         }
         
         if renamedCounter == 1 {

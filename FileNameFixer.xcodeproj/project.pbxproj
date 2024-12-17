@@ -144,7 +144,6 @@
 		3FCA48502884903900809B82 /* FileNameFixer */ = {
 			isa = PBXGroup;
 			children = (
-				3F1B5D792D1157F8005F42E4 /* SwiftData */,
 				3FAC3B622AE392B900F117AC /* Screenshots */,
 				3FCA48512884903900809B82 /* FileNameFixerApp.swift */,
 				3FA895422AE03347008FAFF3 /* Settings */,
@@ -158,6 +157,7 @@
 				3FCFA10E28849C1C0083B63E /* FileInfoNameClearer.swift */,
 				3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */,
 				3FCA48552884903C00809B82 /* Assets.xcassets */,
+				3F1B5D792D1157F8005F42E4 /* SwiftData */,
 				3FCA485A2884903C00809B82 /* FileNameFixer.entitlements */,
 				3FCA48572884903C00809B82 /* Preview Content */,
 				3F74531A2AFFCC0800FDB259 /* VisualEffectsView.swift */,

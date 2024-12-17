@@ -33,6 +33,16 @@ public class FileHelper
         return true
     }
     
+    public func checkIfFileDoesExists(file:String) -> Bool
+    {
+        let exists = FileManager.default.fileExists(atPath: file)
+        
+        if exists == false {
+            return false
+        }
+        return true
+    }
+    
     // MARK: Copy file
     public func copyItemAtUrl(sourceURL : URL, toURL destinationURL : URL) -> Bool
     {

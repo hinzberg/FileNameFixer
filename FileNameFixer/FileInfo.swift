@@ -9,11 +9,11 @@ import Observation
 public class FileInfo : Equatable, Identifiable, Hashable
 {
     public var id = UUID()
-    var selected : Bool = false
-    
-    // MARK: Current File
-    
+    public var selected : Bool = false
     public var currentFileNameWithPathAndExtension : String = ""
+    public var destinationFileNameWithPathExtension : String  = ""
+        
+    // MARK: Current File -  Computed Properties
     
     public var currentFileNameOnly : String {
         let file: NSString =  NSString(string: currentFileNameWithPathAndExtension)
@@ -39,9 +39,7 @@ public class FileInfo : Equatable, Identifiable, Hashable
         return false
     }
         
-    // MARK: Destination File
-       
-    public var destinationFileNameWithPathExtension : String  = ""
+    // MARK: Destination File  -  Computed Properties
    
     public var destinationFileNameOnly : String {
         let filename: NSString = NSString(string: destinationFileNameWithPathExtension)
@@ -71,6 +69,8 @@ public class FileInfo : Equatable, Identifiable, Hashable
             self.destinationFileNameWithPathExtension = destinationFileNameWithPathAndExtension}
     }
     
+    // MARK: Compare
+    
     public static func ==(lhs: FileInfo, rhs: FileInfo) -> Bool {
         return lhs.id == rhs.id
     }
@@ -78,4 +78,12 @@ public class FileInfo : Equatable, Identifiable, Hashable
     public func hash(into hasher: inout Hasher) {
         hasher.combine(self.id)
     }
+    
+    // MARK: Update
+    
+    // After renaming current is the same as destination
+    public func Update() {
+        self.currentFileNameWithPathAndExtension = self.destinationFileNameWithPathExtension
+    }
+    
 }
