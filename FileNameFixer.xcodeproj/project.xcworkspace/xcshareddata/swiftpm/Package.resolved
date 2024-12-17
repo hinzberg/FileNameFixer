@@ -1,4 +1,5 @@
 {
+  "originHash" : "7b76f63dda02c12ede173c380829e339275a3c1bf9a726d1c79498017e3dc505",
   "pins" : [
     {
       "identity" : "hinzberg-foundation",
@@ -6,7 +7,7 @@
       "location" : "https://github.com/hinzberg/Hinzberg-Foundation",
       "state" : {
         "branch" : "main",
-        "revision" : "16cc3d9246adb1b52f351d68a6b9692a9006c908"
+        "revision" : "0bc846669ee3201c159cf7a464795743a3711f95"
       }
     },
     {
@@ -19,5 +20,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

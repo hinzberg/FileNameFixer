@@ -34,7 +34,7 @@ public class ContentViewStore :  RepositoryProtocol, ObservableObject
         fileInfoList.append(item)
     }
     
-    public func addMany(item: [FileInfo]) -> Void {
+    public func addMany(items item: [FileInfo]) -> Void {
     }
     
     public func remove(item: FileInfo) -> Void {
@@ -43,7 +43,7 @@ public class ContentViewStore :  RepositoryProtocol, ObservableObject
         }
     }
     
-    public func removeMany(item: [FileInfo]) -> Void {
+    public func removeMany(items item: [FileInfo]) -> Void {
     }
     
     public func getAll() -> [FileInfo] {
