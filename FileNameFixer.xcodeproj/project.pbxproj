@@ -11,6 +11,7 @@
 		3F095F282AFC1B9F00D0F5DF /* AddSuffixSheetWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F095F272AFC1B9F00D0F5DF /* AddSuffixSheetWindow.swift */; };
 		3F1B5D7B2D115847005F42E4 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B5D7A2D115840005F42E4 /* AppConfig.swift */; };
 		3F1B5D7D2D11696E005F42E4 /* ApplicationModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B5D7C2D116965005F42E4 /* ApplicationModelContainer.swift */; };
+		3F1B5D802D11A401005F42E4 /* Url+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B5D7F2D11A3F7005F42E4 /* Url+Extension.swift */; };
 		3F400F0928B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */; };
 		3F7176122892DE7200391C7B /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7176112892DE7200391C7B /* FileHelper.swift */; };
 		3F74531B2AFFCC0800FDB259 /* VisualEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F74531A2AFFCC0800FDB259 /* VisualEffectsView.swift */; };
@@ -41,6 +42,7 @@
 		3F095F272AFC1B9F00D0F5DF /* AddSuffixSheetWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSuffixSheetWindow.swift; sourceTree = "<group>"; };
 		3F1B5D7A2D115840005F42E4 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		3F1B5D7C2D116965005F42E4 /* ApplicationModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModelContainer.swift; sourceTree = "<group>"; };
+		3F1B5D7F2D11A3F7005F42E4 /* Url+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Url+Extension.swift"; sourceTree = "<group>"; };
 		3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewActionDelegateProtocol.swift; sourceTree = "<group>"; };
 		3F7176112892DE7200391C7B /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		3F74531A2AFFCC0800FDB259 /* VisualEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectsView.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 				3FA895402AE02E0A008FAFF3 /* Settings.swift */,
 			);
 			path = SwiftData;
+			sourceTree = "<group>";
+		};
+		3F1B5D7E2D11A3D3005F42E4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3F1B5D7F2D11A3F7005F42E4 /* Url+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		3FA895422AE03347008FAFF3 /* Settings */ = {
@@ -144,6 +154,7 @@
 		3FCA48502884903900809B82 /* FileNameFixer */ = {
 			isa = PBXGroup;
 			children = (
+				3F1B5D7E2D11A3D3005F42E4 /* Extensions */,
 				3F1B5D792D1157F8005F42E4 /* SwiftData */,
 				3FAC3B622AE392B900F117AC /* Screenshots */,
 				3FCA48512884903900809B82 /* FileNameFixerApp.swift */,
@@ -269,6 +280,7 @@
 				3F1B5D7B2D115847005F42E4 /* AppConfig.swift in Sources */,
 				3FBA282528BD3C24002BC4F6 /* ContentViewStore.swift in Sources */,
 				3FC432392AFB486F0047C145 /* CleanupPanelView.swift in Sources */,
+				3F1B5D802D11A401005F42E4 /* Url+Extension.swift in Sources */,
 				3FC4323D2AFB516F0047C145 /* AddPrefixSheetWindow.swift in Sources */,
 				3FB700B42AA7A63E00167ED0 /* SettingsView.swift in Sources */,
 				3F74531B2AFFCC0800FDB259 /* VisualEffectsView.swift in Sources */,
