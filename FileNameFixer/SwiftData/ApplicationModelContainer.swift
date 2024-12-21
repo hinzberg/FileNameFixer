@@ -39,7 +39,5 @@ actor ApplicationModelContainer {
             print("No AppConfig found. Creating default")
             container.mainContext.insert( AppConfig())
         }
-        
     }
-    
 }

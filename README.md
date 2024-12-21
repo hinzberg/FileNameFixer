@@ -16,7 +16,10 @@ This program will take care of this problem and renaming files will become a bre
 
 ## History
 
-### 2024-11-15
+### 2024-12-21
+- Added Contextmenu with DynamicContextMenu
+
+### 2024-12-15
 - Added Inspector with file size and quicklook
 
 ### 2024-11-15

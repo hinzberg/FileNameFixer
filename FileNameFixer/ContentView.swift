@@ -43,6 +43,11 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                         .tag(fileInfo)
                         .listRowInsets(EdgeInsets())
                         .listRowSeparator(.hidden)
+                        .dynamicContextMenu(menuItems:  [
+                            DynamicMenuItem(title: "Edit", image: "highlighter", action: { edit(fileInfo: fileInfo ) }),
+                            DynamicMenuItem(title: "Remove", image: "xmark.circle", action: { remove(fileInfo: fileInfo ) }),
+                        ])
+                    
                 }
                 .listStyle(PlainListStyle())
                 

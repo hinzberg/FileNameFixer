@@ -12,6 +12,7 @@
 		3F1B5D7B2D115847005F42E4 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B5D7A2D115840005F42E4 /* AppConfig.swift */; };
 		3F1B5D7D2D11696E005F42E4 /* ApplicationModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B5D7C2D116965005F42E4 /* ApplicationModelContainer.swift */; };
 		3F400F0928B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */; };
+		3F6CEED92D15E88C00EA6004 /* DynamicContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CEED82D15E88C00EA6004 /* DynamicContextMenu.swift */; };
 		3F7176122892DE7200391C7B /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7176112892DE7200391C7B /* FileHelper.swift */; };
 		3F74531B2AFFCC0800FDB259 /* VisualEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F74531A2AFFCC0800FDB259 /* VisualEffectsView.swift */; };
 		3F74531D2AFFD5AB00FDB259 /* InspectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F74531C2AFFD5AB00FDB259 /* InspectorView.swift */; };
@@ -42,6 +43,7 @@
 		3F1B5D7A2D115840005F42E4 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		3F1B5D7C2D116965005F42E4 /* ApplicationModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModelContainer.swift; sourceTree = "<group>"; };
 		3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewActionDelegateProtocol.swift; sourceTree = "<group>"; };
+		3F6CEED82D15E88C00EA6004 /* DynamicContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicContextMenu.swift; sourceTree = "<group>"; };
 		3F7176112892DE7200391C7B /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		3F74531A2AFFCC0800FDB259 /* VisualEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectsView.swift; sourceTree = "<group>"; };
 		3F74531C2AFFD5AB00FDB259 /* InspectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				3FCA48572884903C00809B82 /* Preview Content */,
 				3F74531A2AFFCC0800FDB259 /* VisualEffectsView.swift */,
 				3F74531C2AFFD5AB00FDB259 /* InspectorView.swift */,
+				3F6CEED82D15E88C00EA6004 /* DynamicContextMenu.swift */,
 			);
 			path = FileNameFixer;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				3FEC2ED228E9E18300D35D2D /* StatusView.swift in Sources */,
 				3FB700B02AA7A5CA00167ED0 /* NavigationSideBarItem.swift in Sources */,
 				3FCA48542884903900809B82 /* ContentView.swift in Sources */,
+				3F6CEED92D15E88C00EA6004 /* DynamicContextMenu.swift in Sources */,
 				3F095F282AFC1B9F00D0F5DF /* AddSuffixSheetWindow.swift in Sources */,
 				3F400F0928B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift in Sources */,
 				3FCA48522884903900809B82 /* FileNameFixerApp.swift in Sources */,
@@ -424,7 +428,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.cocoa-coding.FileNameFixer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
@@ -457,7 +461,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.cocoa-coding.FileNameFixer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
