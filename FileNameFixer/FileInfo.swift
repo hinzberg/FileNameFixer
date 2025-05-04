@@ -32,8 +32,18 @@ public class FileInfo : Equatable, Identifiable, Hashable
         filename = NSString(string: filename.lastPathComponent)
         return  filename.deletingPathExtension }
     
+    // MARK: Compare
+    
+    public static func ==(lhs: FileInfo, rhs: FileInfo) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
+    
     public var currentAndDestinationNameAreTheSame : Bool {
-        if currentFileNameOnly.caseInsensitiveCompare(self.destinationFileNameOnly) == .orderedSame {
+        if currentFileNameOnly.compare(self.destinationFileNameOnly) == .orderedSame {
             return true
         }
         return false
@@ -68,17 +78,7 @@ public class FileInfo : Equatable, Identifiable, Hashable
         if  destinationFileNameWithPathAndExtension != "" {
             self.destinationFileNameWithPathExtension = destinationFileNameWithPathAndExtension}
     }
-    
-    // MARK: Compare
-    
-    public static func ==(lhs: FileInfo, rhs: FileInfo) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-    }
-    
+        
     // MARK: Update
     
     // After renaming current is the same as destination
