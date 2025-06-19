@@ -16,6 +16,9 @@ This program will take care of this problem and renaming files will become a bre
 
 ## History
 
+### 2025-06-19
+- Changed custom view for to SwiftUI table
+
 ### 2025-05-04
 - Introduced CalVer Versionnumber
 - Fixed a bug where differences in upper and lower case were not recognised as a difference.

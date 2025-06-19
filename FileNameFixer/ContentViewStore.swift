@@ -51,7 +51,7 @@ public class ContentViewStore :  RepositoryProtocol, ObservableObject
     }
     
     public func get(id: UUID) -> FileInfo? {
-        return nil
+        return fileInfoList.first{ $0.id == id}
     }
     
     public func clear() -> Void {

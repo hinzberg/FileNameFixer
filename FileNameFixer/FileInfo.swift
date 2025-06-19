@@ -12,6 +12,7 @@ public class FileInfo : Equatable, Identifiable, Hashable
     public var selected : Bool = false
     public var currentFileNameWithPathAndExtension : String = ""
     public var destinationFileNameWithPathExtension : String  = ""
+    public var fileSize : Int64? = 0
         
     // MARK: Current File -  Computed Properties
     
@@ -68,10 +69,12 @@ public class FileInfo : Equatable, Identifiable, Hashable
         filename = NSString(string: filename.lastPathComponent)
         return  filename.deletingPathExtension }
     
-    // MARK: init
+    // MARK: init - Constructor
         
-    init (currentFileNameWithPathAndExtension : String = "", destinationFileNameWithPathAndExtension : String = "")
+    init (currentFileNameWithPathAndExtension : String = "", destinationFileNameWithPathAndExtension : String = "", fileSize : Int64? = 0)
     {
+        self.fileSize = fileSize
+        
         if  currentFileNameWithPathAndExtension != "" {
             self.currentFileNameWithPathAndExtension = currentFileNameWithPathAndExtension}
         

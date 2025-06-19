@@ -148,4 +148,16 @@ public class FileHelper
         }
         return success
     }
+    
+    func getFileSize(from url: URL) -> Int64? {
+        do {
+            let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+            if let fileSize = attributes[.size] as? NSNumber {
+                return fileSize.int64Value
+            }
+        } catch {
+            print("Error getting file size: \(error)")
+        }
+        return nil
+    }
 }

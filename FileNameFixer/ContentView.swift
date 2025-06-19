@@ -11,8 +11,9 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     @EnvironmentObject var store: ContentViewStore
     @State var showingRenameSheet = false
     @State var statusText : String = ""
-    @State private var selection : FileInfo?
-    
+    @State private var selectedFileInfoID :  FileInfo.ID? = nil
+    @State private var selectedFileInfo : FileInfo? = nil
+        
     // SwiftData
     @Environment(\.modelContext) private var modelContext
     @Query private var unwantedWords : [UnwantedWord]
@@ -37,19 +38,46 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         
         VStack {
             
+            // MARK: File Info List View
+            
             if store.fileInfoList.count > 0 {
-                List (store.fileInfoList, id: \.self, selection: $selection) { fileInfo in
-                    FileInfoView(fileInfo: fileInfo, delegate: self)
-                        .tag(fileInfo)
-                        .listRowInsets(EdgeInsets())
-                        .listRowSeparator(.hidden)
-                        .dynamicContextMenu(menuItems:  [
-                            DynamicMenuItem(title: "Edit", image: "highlighter", action: { edit(fileInfo: fileInfo ) }),
-                            DynamicMenuItem(title: "Remove", image: "xmark.circle", action: { remove(fileInfo: fileInfo ) }),
-                        ])
+                
+                /*
+                 List (store.fileInfoList, id: \.self, selection: $selection) { fileInfo in
+                 FileInfoView(fileInfo: fileInfo, delegate: self)
+                 .tag(fileInfo)
+                 .listRowInsets(EdgeInsets())
+                 .listRowSeparator(.hidden)
+                 .dynamicContextMenu(menuItems:  [
+                 DynamicMenuItem(title: "Edit", image: "highlighter", action: { edit(fileInfo: fileInfo ) }),
+                 DynamicMenuItem(title: "Remove", image: "xmark.circle", action: { remove(fileInfo: fileInfo ) }),
+                 ])
+                 }.listStyle(PlainListStyle())
+                 */
+                
+                Table(store.fileInfoList, selection: $selectedFileInfoID)  {
+                                        
+                    TableColumn("Filename") { info in
+                        FileNameTableCell(fileInfo: info)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                     }
                     
+                    TableColumn("Size") { info in
+                        FileSizeTableCell(fileInfo: info)
+                    }
+                    .width(100)
+
+                    TableColumn("Actions") { info in
+                        ButtonsTableCell(fileInfo: info, delegate: self)
+                            .tag(info)
+                    }
+                    .width(100)
                 }
-                .listStyle(PlainListStyle())
+                .onChange(of: selectedFileInfoID) { oldValue, newValue in
+                    if let currentSelectedId = newValue {
+                        selectedFileInfo = store.get(id: currentSelectedId)
+                    }
+                }
                 
             } else {
                 ContentUnavailableView {
@@ -98,12 +126,14 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
             showTextInputRenameSheet()
         }
         .inspector(isPresented: isShowingInspectorBinding) {
-            InspectorView(fileInfo: $selection)
-                .inspectorColumnWidth(min: 150, ideal: 150, max: 300)
-                .interactiveDismissDisabled()
+                
+                InspectorView(fileInfo: $selectedFileInfo)
+                    .inspectorColumnWidth(min: 150, ideal: 150, max: 300)
+                    .interactiveDismissDisabled()
         }
         .navigationTitle(getWindowTitleWithVersion())
     }
+    
     
     /// Will open a sheet to rename the selected file
     func showTextInputRenameSheet() -> some View {
@@ -129,8 +159,11 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         panel.canChooseDirectories = false
         if panel.runModal() == .OK
         {
+            let fileHelper = FileHelper()
+            
             for url in panel.urls {
-                let file = FileInfo(currentFileNameWithPathAndExtension: url.path, destinationFileNameWithPathAndExtension: url.path)
+                let fileSize = fileHelper.getFileSize(from: url)
+                let file = FileInfo(currentFileNameWithPathAndExtension: url.path, destinationFileNameWithPathAndExtension: url.path, fileSize: fileSize )
                 store.add(item: file)
             }
             store.createNewFilenames(unwantedWords: self.unwantedWords, prefixes: self.prefixes, suffixes: self.suffixes, setting: self.settings.first!)

@@ -13,16 +13,15 @@ struct InspectorView: View {
     var body: some View {
         
         VStack {
-            
-            if  fileInfo != nil {
-                Text(fileInfo!.currentFileNameOnly)
+            if  let fileInfo = fileInfo {
+                Text(fileInfo.currentFileNameOnly)
                     .padding(4)
                 
-                Text(URL(fileURLWithPath: fileInfo!.currentFileNameWithPathAndExtension).fileSizeString )
+                Text( formatBytes(fileInfo.fileSize ?? 0))
                     .padding(4)
                 
                 Button("Show Quicklook", action: {
-                    documentUrl = URL(fileURLWithPath: fileInfo!.currentFileNameWithPathAndExtension)
+                    documentUrl = URL(fileURLWithPath: fileInfo.currentFileNameWithPathAndExtension)
                 })
                 .padding(4)
                 .quickLookPreview($documentUrl)
