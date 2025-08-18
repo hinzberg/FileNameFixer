@@ -54,6 +54,10 @@ public class FileInfoNameClearer {
                 replaceDots(fileInfo: fileInfo)
             }
             
+            if setting.replaceUnderscores {
+                replaceUnderscores(fileInfo: fileInfo)
+            }
+                        
             if setting.capitalizeWords {
                 capitalizeWords(fileInfo: fileInfo)
             }
@@ -146,6 +150,18 @@ public class FileInfoNameClearer {
         textContent = textContent.replacingOccurrences(of: "..", with: ".")
         textContent = textContent.removeSuffix(".")
         textContent = textContent.replacingOccurrences(of: ".", with: " ")
+        textContent = textContent.trim()
+        
+        self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)
+    }
+    
+    /// Replace underscores from destination filename with spaces
+    /// - Parameter fileInfo: FileInfo
+    private func replaceUnderscores(fileInfo : FileInfo)
+    {
+        var textContent = fileInfo.destinationFileNameOnlyWithOutExtension
+
+        textContent = textContent.replacingOccurrences(of: "_", with: " ")
         textContent = textContent.trim()
         
         self.changeDestinationFileName(fileInfo: fileInfo, newFileName: textContent)

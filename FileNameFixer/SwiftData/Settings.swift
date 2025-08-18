@@ -14,6 +14,7 @@ public class Settings {
     public var doCleanup = true
     public var replaceDate = true
     public var replaceDots = true
+    public var replaceUnderscores = true
     public var capitalizeWords = true
     // Prefixes
     public var addPrefixes:Bool = false;

@@ -440,7 +440,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 25.04.05;
+				MARKETING_VERSION = 25.08.18;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.cocoa-coding.FileNameFixer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
@@ -473,7 +473,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 25.04.05;
+				MARKETING_VERSION = 25.08.18;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.cocoa-coding.FileNameFixer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";

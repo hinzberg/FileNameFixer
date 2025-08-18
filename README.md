@@ -9,12 +9,15 @@ This program will take care of this problem and renaming files will become a bre
 - Remove filler words
 - Replace dots with spaces
 - Capitalize words
-- Rearrange date to begiining of filename
+- Rearrange date to begining of filename
 
 ![Screenshot 1](https://github.com/hinzberg/FileNameFixer/blob/main/FileNameFixer/Screenshots/Screenshot%201.png)
 ![Screenshot 2](https://github.com/hinzberg/FileNameFixer/blob/main/FileNameFixer/Screenshots/Screenshot%202.png)
 
 ## History
+
+### 2025-08-18
+- New cleanup option: Replace Underscores with Spaces
 
 ### 2025-06-19
 - Changed custom view for to SwiftUI table

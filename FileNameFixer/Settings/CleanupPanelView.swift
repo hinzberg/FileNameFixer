@@ -13,62 +13,72 @@ struct CleanupPanelView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var unwantedWords : [UnwantedWord]
     @Query private var settings : [Settings]
-
+    
     var body: some View {
-
+        
         let doCleanupProxy : Binding<Bool>  = Binding(
             get: { return self.settings.first!.doCleanup },
             set: {  self.settings.first!.doCleanup = $0  }
         )
-
+        
         var cleanupEnabledProxy : Bool {
-             get { return self.settings.first!.doCleanup }
-             set {  self.settings.first!.doCleanup = newValue  }
-         }
+            get { return self.settings.first!.doCleanup }
+            set {  self.settings.first!.doCleanup = newValue  }
+        }
         
         let replaceDateProxy : Binding<Bool>  = Binding(
             get: { return self.settings.first!.replaceDate },
             set: {  self.settings.first!.replaceDate = $0  }
         )
-
+        
         let replaceDotsProxy : Binding<Bool>  = Binding(
             get: { return self.settings.first!.replaceDots },
             set: {  self.settings.first!.replaceDots = $0  }
+        )
+        
+        let replaceUnderscoresProxy : Binding<Bool>  = Binding(
+            get: { return self.settings.first!.replaceUnderscores },
+            set: {  self.settings.first!.replaceUnderscores = $0  }
         )
         
         let capitalizeWordsProxy : Binding<Bool>  = Binding(
             get: { return self.settings.first!.capitalizeWords },
             set: {  self.settings.first!.capitalizeWords = $0  }
         )
-                
+        
         VStack {
             
             VStack {
                 Text("Cleanup")
                     .font(.title)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
-                 
-            Toggle("Do Cleanup", isOn:  doCleanupProxy  )
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
-            
-            Divider()
-                        
-            Toggle("Replace Date", isOn:  replaceDateProxy  )
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
-                .disabled(!cleanupEnabledProxy)
-            
-            Toggle("Replace Dots with Spaces", isOn:  replaceDotsProxy  )
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
-                .disabled(!cleanupEnabledProxy)
-            
-            Toggle("Capitalize Words", isOn:  capitalizeWordsProxy  )
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
-                .disabled(!cleanupEnabledProxy)
+                    .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
+                
+                Toggle("Do Cleanup", isOn:  doCleanupProxy  )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
+                
+                Divider()
+                
+                Toggle("Replace Date", isOn:  replaceDateProxy  )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                    .disabled(!cleanupEnabledProxy)
+                
+                Toggle("Replace Dots with Spaces", isOn:  replaceDotsProxy  )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                    .disabled(!cleanupEnabledProxy)
+                
+                Toggle("Replace Underscores with Spaces", isOn:  replaceUnderscoresProxy  )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                    .disabled(!cleanupEnabledProxy)
+                
+                Toggle("Capitalize Words", isOn:  capitalizeWordsProxy  )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                    .disabled(!cleanupEnabledProxy)
                 
                 Spacer()
             }.frame(maxWidth: .infinity, minHeight: 170 , maxHeight: 170)
@@ -95,7 +105,7 @@ struct CleanupPanelView: View {
                 TableColumn("Unwanted Words", value: \.word)
                     .width(min: 100, max: 100)
             }
-              .tableStyle(.inset)
+            .tableStyle(.inset)
             .disabled(!cleanupEnabledProxy)
             
             Spacer()
@@ -117,8 +127,6 @@ struct CleanupPanelView: View {
             }
         }
     }
-    
-
 }
 
 #Preview {
