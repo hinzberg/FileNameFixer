@@ -92,4 +92,4 @@ This program will take care of this problem and renaming files will become a bre
 ## ToDo
 - Refresh list after rename
 - Manual Rename TextField not big enough for long text, no text scroll
-- Setting: Replace Spaces with underscores
+- Add default unwanted words
