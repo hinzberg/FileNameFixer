@@ -34,6 +34,7 @@
 		3FCFA10D28849ACD0083B63E /* FileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCFA10C28849ACD0083B63E /* FileInfoView.swift */; };
 		3FCFA10F28849C1C0083B63E /* FileInfoNameClearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCFA10E28849C1C0083B63E /* FileInfoNameClearer.swift */; };
 		3FEC2ED228E9E18300D35D2D /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC2ED128E9E18300D35D2D /* StatusView.swift */; };
+		3FED3A1D2F12465C004500E8 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FED3A1C2F12465C004500E8 /* GeneralSettingsView.swift */; };
 		3FFF850328CE69560066BB26 /* Hinzberg-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3FFF850228CE69560066BB26 /* Hinzberg-SwiftUI */; };
 		3FFF850628CE696E0066BB26 /* Hinzberg-Foundation in Frameworks */ = {isa = PBXBuildFile; productRef = 3FFF850528CE696E0066BB26 /* Hinzberg-Foundation */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		3FCFA10C28849ACD0083B63E /* FileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoView.swift; sourceTree = "<group>"; };
 		3FCFA10E28849C1C0083B63E /* FileInfoNameClearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoNameClearer.swift; sourceTree = "<group>"; };
 		3FEC2ED128E9E18300D35D2D /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
+		3FED3A1C2F12465C004500E8 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -110,6 +112,7 @@
 				3FA895432AE03371008FAFF3 /* AddUnwantedWordSheetWindow.swift */,
 				3FC4323C2AFB516F0047C145 /* AddPrefixSheetWindow.swift */,
 				3F095F272AFC1B9F00D0F5DF /* AddSuffixSheetWindow.swift */,
+				3FED3A1C2F12465C004500E8 /* GeneralSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -220,7 +223,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					3FCA484D2884903900809B82 = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -280,6 +283,7 @@
 				3F6CEED92D15E88C00EA6004 /* DynamicContextMenu.swift in Sources */,
 				3F095F282AFC1B9F00D0F5DF /* AddSuffixSheetWindow.swift in Sources */,
 				3F400F0928B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift in Sources */,
+				3FED3A1D2F12465C004500E8 /* GeneralSettingsView.swift in Sources */,
 				3FCA48522884903900809B82 /* FileNameFixerApp.swift in Sources */,
 				3F7176122892DE7200391C7B /* FileHelper.swift in Sources */,
 				3F1B5D7B2D115847005F42E4 /* AppConfig.swift in Sources */,
@@ -333,6 +337,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 689286JZWP;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -355,6 +360,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -396,6 +402,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 689286JZWP;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -411,6 +418,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -429,17 +437,20 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"FileNameFixer/Preview Content\"";
-				DEVELOPMENT_TEAM = 689286JZWP;
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_FILE_ACCESS_MOVIES_FOLDER = readwrite;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 25.08.18;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.cocoa-coding.FileNameFixer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -462,17 +473,20 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"FileNameFixer/Preview Content\"";
-				DEVELOPMENT_TEAM = 689286JZWP;
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_FILE_ACCESS_MOVIES_FOLDER = readwrite;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 25.08.18;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.cocoa-coding.FileNameFixer";
 				PRODUCT_NAME = "$(TARGET_NAME)";

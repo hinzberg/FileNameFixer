@@ -43,11 +43,11 @@ public class FileInfo : Equatable, Identifiable, Hashable
         hasher.combine(self.id)
     }
     
-    public var currentAndDestinationNameAreTheSame : Bool {
+    public var needToBeRenamed : Bool {
         if currentFileNameOnly.compare(self.destinationFileNameOnly) == .orderedSame {
-            return true
+            return false
         }
-        return false
+        return true
     }
         
     // MARK: Destination File  -  Computed Properties

@@ -10,6 +10,9 @@ public class Settings {
     
     @Attribute(.unique) public var Id = UUID()
     
+    // View Settings
+    public var showOnlyFilesToRename:Bool = false;
+    
     // Cleanup
     public var doCleanup = true
     public var replaceDate = true

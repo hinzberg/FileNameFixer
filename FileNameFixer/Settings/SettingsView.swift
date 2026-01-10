@@ -7,13 +7,19 @@ import SwiftData
 
 struct SettingsView: View {
     var body: some View {
-        HStack {
-            CleanupPanelView()
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-            PrefixesPanelView()
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-            SuffixesPanelView()
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+        
+        VStack {
+            GeneralSettingsView()
+                .padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
+            
+            HStack {
+                CleanupPanelView()
+                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                PrefixesPanelView()
+                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                SuffixesPanelView()
+                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+            }
         }
         .navigationTitle(getWindowTitleWithVersion())
     }

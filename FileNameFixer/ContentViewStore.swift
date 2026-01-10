@@ -4,6 +4,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 import Hinzberg_Foundation
 import Observation
 
@@ -17,17 +18,18 @@ public class SelectedInfo {
 public class ContentViewStore :  RepositoryProtocol, ObservableObject
 {
     public typealias RepositoryType = FileInfo
-    
-    public var selectedForRename = SelectedInfo()
+        
+    // This is the public list for the table
     var fileInfoList = [FileInfo]()
     
+    public var selectedForRename = SelectedInfo()
+        
     public func getCount() -> Int {
         return fileInfoList.count
     }
     
-    public func getFilesPreparedForRenameCount() -> Int
-    {
-        return fileInfoList.filter{ $0.currentAndDestinationNameAreTheSame == false }.count
+    public var needToBeRenamedCount: Int {
+        fileInfoList.filter { $0.needToBeRenamed == true }.count
     }
           
     public func add(item: FileInfo) -> Void {
@@ -66,5 +68,10 @@ public class ContentViewStore :  RepositoryProtocol, ObservableObject
     {
         let clearer = FileInfoNameClearer(fileInfoList: self.fileInfoList)
         clearer.createNewFilenames(unwantedWords: unwantedWords, prefixes: prefixes, suffixes: suffixes, setting: setting)
+        
+        
+        
+        // fileInfoList = fileInfoList.filter { $0.needToBeRenamed == true }
     }
 }
+

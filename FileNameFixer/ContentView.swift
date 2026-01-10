@@ -36,26 +36,21 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
             )
         }
         
+        var itemsToShow : [FileInfo] {
+            if self.settings.first!.showOnlyFilesToRename
+            {
+                return store.fileInfoList.filter { $0.needToBeRenamed == true }
+            }
+            return store.fileInfoList
+        }
+        
         VStack {
             
             // MARK: File Info List View
             
-            if store.fileInfoList.count > 0 {
+            if itemsToShow.count > 0 {
                 
-                /*
-                 List (store.fileInfoList, id: \.self, selection: $selection) { fileInfo in
-                 FileInfoView(fileInfo: fileInfo, delegate: self)
-                 .tag(fileInfo)
-                 .listRowInsets(EdgeInsets())
-                 .listRowSeparator(.hidden)
-                 .dynamicContextMenu(menuItems:  [
-                 DynamicMenuItem(title: "Edit", image: "highlighter", action: { edit(fileInfo: fileInfo ) }),
-                 DynamicMenuItem(title: "Remove", image: "xmark.circle", action: { remove(fileInfo: fileInfo ) }),
-                 ])
-                 }.listStyle(PlainListStyle())
-                 */
-                
-                Table(store.fileInfoList, selection: $selectedFileInfoID)  {
+                Table(itemsToShow, selection: $selectedFileInfoID)  {
                                         
                     TableColumn("Filename") { info in
                         FileNameTableCell(fileInfo: info)
@@ -133,8 +128,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         }
         .navigationTitle(getWindowTitleWithVersion())
     }
-    
-    
+        
     /// Will open a sheet to rename the selected file
     func showTextInputRenameSheet() -> some View {
         return TextInputView(defaultText: store.selectedForRename.fileName) { textContent in
@@ -173,20 +167,29 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     func updateStatusText()
     {
         let totalCount = store.getCount()
-        let differentNameCount = store.getFilesPreparedForRenameCount()
+        let differentNameCount = store.needToBeRenamedCount
         var status = ""
         
-        if totalCount == 1 {
-            status = "One file selected"
-        }
-        else if totalCount > 0 {
-            status = "\(totalCount) files selected"
-        }
-        else {
-            status = "No file selected"
+        if self.settings.first!.showOnlyFilesToRename  {
+            status = "[Show only files to rename] "
+        } else {
+            status = "[Show all files] "
+            
+            if totalCount == 0 {
+                status += "No file found"
+            }
+            else if totalCount == 1 {
+                status += "One file found"
+            }
+            else if totalCount > 0 {
+                status += "\(totalCount) files found"
+            }
         }
         
-        if differentNameCount == 1 {
+        if differentNameCount == 0 {
+            status += " - No file to rename"
+        }
+        else if differentNameCount == 1 {
             status += " - One file to rename"
         }
         else if differentNameCount > 0 {
@@ -202,7 +205,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     {
         var renamedCounter = 0
         let fileHelper = FileHelper()
-        let filesToRename = store.fileInfoList.filter { $0.currentAndDestinationNameAreTheSame == false }
+        let filesToRename = store.fileInfoList.filter { $0.needToBeRenamed == false }
         
         for info in  filesToRename
         {

@@ -21,7 +21,7 @@ struct FileInfoView: View {
                 HStack {
                     Text(fileInfo.destinationFileNameOnly)
                         .font(.title2)
-                        .foregroundColor(fileInfo.currentAndDestinationNameAreTheSame ? .green : .red )
+                        .foregroundColor(fileInfo.needToBeRenamed ? .green : .red )
                     Spacer()
                 }
             }
