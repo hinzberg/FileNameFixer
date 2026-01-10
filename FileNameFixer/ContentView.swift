@@ -75,6 +75,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                 }
                 
             } else {
+                
                 ContentUnavailableView {
                     Label("No files to rename", systemImage: "questionmark.folder")
                 } description: {
@@ -85,10 +86,15 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                         updateStatusText()
                     }.buttonStyle(.link)
                 }
+                .padding(EdgeInsets(top: 50, leading: 0, bottom: 0, trailing: 0))
             }
             
+            Spacer()
+            
+            // MARK: Status Bar
             StatusView(statusText: $statusText)
                 .frame(height: 25)
+                .onAppear(perform: updateStatusText)
         }
         .toolbar (id: "main") {
             ToolbarItem(id: "files") {
@@ -109,6 +115,20 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
                     Label("Clear list", systemImage: "xmark.circle")
                 }
             }
+            
+            ToolbarSpacer(.flexible)
+            
+            ToolbarItem(id: "hide") {
+                Button() {
+                    self.settings.first!.showOnlyFilesToRename.toggle()
+                    updateStatusText()
+                }  label: {
+                    Label("Hide / Show Files", systemImage: "eye")
+                }
+            }
+            
+            ToolbarSpacer(.flexible)
+                        
             ToolbarItem(id: "inspector") {
                 Button(action: {
                     isShowingInspector.toggle()
@@ -169,6 +189,11 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
         let totalCount = store.getCount()
         let differentNameCount = store.needToBeRenamedCount
         var status = ""
+        
+        if totalCount == 0 {
+            statusText = "No files found"
+            return
+        }
         
         if self.settings.first!.showOnlyFilesToRename  {
             status = "[Show only files to rename] "

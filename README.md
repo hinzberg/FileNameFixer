@@ -16,6 +16,9 @@ This program will take care of this problem and renaming files will become a bre
 
 ## History
 
+### 2026-01-10
+- Added option to show only files that need to be renamed
+
 ### 2025-08-18
 - New cleanup option: Replace Underscores with Spaces
 
