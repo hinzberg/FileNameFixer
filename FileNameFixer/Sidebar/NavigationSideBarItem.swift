@@ -9,6 +9,7 @@ import SwiftUI
 public enum NavigationSideBarItemIdentifier {
     case fileList
     case settings
+    case logs
 }
 
 public struct NavigationSideBarItem : Identifiable, Hashable {

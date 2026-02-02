@@ -15,6 +15,7 @@ struct NavigationManagerView: View {
     {
         sideBarItems =  [
             NavigationSideBarItem(displayText: "File List", imageName: "list.dash", identifier: .fileList)
+            ,NavigationSideBarItem(displayText: "Logs", imageName: "list.bullet.rectangle", identifier: .logs)
             ,NavigationSideBarItem(displayText: "Settings", imageName: "gear", identifier: .settings)
         ]
     }
@@ -36,6 +37,8 @@ struct NavigationManagerView: View {
             case .settings:
                 SettingsView()
                     .background(VisualEffectView())
+            case .logs:
+                LogItemListView()
             }
         }
     }

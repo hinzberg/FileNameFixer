@@ -77,6 +77,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3F4284D22E04381D0044C84A /* TableCells */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TableCells; sourceTree = "<group>"; };
+		3F611DE62F3107D5003489A5 /* Logging */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Logging; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +156,7 @@
 		3FCA48502884903900809B82 /* FileNameFixer */ = {
 			isa = PBXGroup;
 			children = (
+				3F611DE62F3107D5003489A5 /* Logging */,
 				3F4284DE2E045E410044C84A /* Utils.swift */,
 				3FAC3B622AE392B900F117AC /* Screenshots */,
 				3FCA48512884903900809B82 /* FileNameFixerApp.swift */,
@@ -205,6 +207,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				3F4284D22E04381D0044C84A /* TableCells */,
+				3F611DE62F3107D5003489A5 /* Logging */,
 			);
 			name = FileNameFixer;
 			packageProductDependencies = (
