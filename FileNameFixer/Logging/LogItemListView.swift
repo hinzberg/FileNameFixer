@@ -36,15 +36,24 @@ struct LogItemListView: View
             }
             .padding(.horizontal)
             .padding(.top, 8)
-            
             List {
                 ForEach(filteredItems, id: \.id) { item in
                     LogItemCell(logItem: item)
+                        .listRowSeparator(.hidden)
                 }
             }
             Spacer()
         }
         .navigationTitle(getWindowTitleWithVersion())
+        .toolbar (id: "logs") {
+            ToolbarItem(id: "logActions", placement: .destructiveAction) {
+                Button {
+                    logsRepo.clearAllItems()
+                } label: {
+                    Label("Clear Logs", systemImage: "trash")
+                }
+            }
+        }
     }
     
     func getWindowTitleWithVersion() -> String {

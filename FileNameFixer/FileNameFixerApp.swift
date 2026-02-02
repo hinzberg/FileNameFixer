@@ -12,7 +12,7 @@ struct FileNameFixerApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationManagerView()
-                .background(VisualEffectView())
+               // .background(VisualEffectView())
         }
         .modelContainer(ApplicationModelContainer.create())
         .environment(contentViewStore)

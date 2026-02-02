@@ -22,6 +22,13 @@ public class LogItemRepository: ObservableObject {
         }
     }
     
+    /// Removes all log items.
+    public func clearAllItems() {
+        DispatchQueue.main.async {
+            self.logItems.removeAll()
+        }
+    }
+    
     /// Returns log items filtered by optional message substring and/or priority.
     /// - Parameters:
     ///   - messageFilter: If non-nil, only items whose message contains this string (case-insensitive) are included.
