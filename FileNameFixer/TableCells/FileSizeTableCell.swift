@@ -1,9 +1,6 @@
-//
 //  FileSizeTableCell.swift
 //  FileNameFixer
-//
 //  Created by Holger Hinzberg on 19.06.25.
-//
 
 import SwiftUI
 

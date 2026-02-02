@@ -16,19 +16,13 @@ struct LogItemCell: View {
     
     var body: some View {
         HStack {
-            self.priorityView()
-            Text( "\(logItem.date, formatter: Self.timeFormat)").font(.title2)
-            Text(logItem.message).font(.title2)
+            PriorityIconView(priority: logItem.priority)
+            Text( "\(logItem.date, formatter: Self.timeFormat)")
+                .font(.title2)
+            Text(logItem.message)
+                .font(.title2)
             Spacer()
-        }.padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 0))
-    }
-    
-    private func priorityView() -> AnyView {
-        switch logItem.priority {
-        case .Information: return AnyView( Image(systemName: "info.circle").font(.title2) .foregroundColor(.green) )
-        case .Exclamation: return AnyView( Image(systemName: "exclamationmark.triangle").font(.title2) .foregroundColor(.red))
-        case .Warning: return AnyView( Image(systemName: "questionmark.diamond").font(.title2) .foregroundColor(.orange))
-        }
+        }.padding(EdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 0))
     }
 }
 

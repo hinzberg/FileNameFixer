@@ -7,15 +7,49 @@ import SwiftUI
 struct LogItemListView: View
 {
     @ObservedObject var logsRepo = LogItemRepository.shared
+    @State private var messageFilterText = ""
+    @State private var selectedPriorityFilter: PriorityFilterOption = .all
+    
+    private var filteredItems: [LogItem] {
+        let messageFilter = messageFilterText.trimmingCharacters(in: .whitespacesAndNewlines)
+        return logsRepo.filteredItems(
+            messageFilter: messageFilter.isEmpty ? nil : messageFilter,
+            priorityFilter: selectedPriorityFilter.asLogItemPriority
+        )
+    }
+    
     var body: some View {
         VStack {
-            List{
-                ForEach (self.logsRepo.logItems, id: \.id) { item in
+            HStack(spacing: 12) {
+                TextField("Write here to filter", text: $messageFilterText)
+                    .textFieldStyle(.roundedBorder)
+                    .font(.title2)
+                Picker("Priority", selection: $selectedPriorityFilter) {
+                    ForEach(PriorityFilterOption.allCases, id: \.self) { option in
+                        Text(option.rawValue)
+                            .font(.title2)
+                            .tag(option)
+                    }
+                }
+                .pickerStyle(.menu)
+                .frame(minWidth: 120)
+            }
+            .padding(.horizontal)
+            .padding(.top, 8)
+            
+            List {
+                ForEach(filteredItems, id: \.id) { item in
                     LogItemCell(logItem: item)
                 }
             }
             Spacer()
         }
+        .navigationTitle(getWindowTitleWithVersion())
+    }
+    
+    func getWindowTitleWithVersion() -> String {
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        return "File Name Fixer - Version \(appVersion!)"
     }
 }
 
