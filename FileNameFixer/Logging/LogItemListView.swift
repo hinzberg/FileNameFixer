@@ -21,9 +21,7 @@ struct LogItemListView: View
     var body: some View {
         VStack {
             HStack(spacing: 12) {
-                TextField("Write here to filter", text: $messageFilterText)
-                    .textFieldStyle(.roundedBorder)
-                    .font(.title2)
+                Spacer()
                 Picker("Priority", selection: $selectedPriorityFilter) {
                     ForEach(PriorityFilterOption.allCases, id: \.self) { option in
                         Text(option.rawValue)
@@ -41,6 +39,7 @@ struct LogItemListView: View
                     LogItemCell(logItem: item)
                         .listRowSeparator(.hidden)
                 }
+                .searchable(text: $messageFilterText)
             }
             Spacer()
         }

@@ -9,6 +9,7 @@ import Hinzberg_SwiftUI
 struct ContentView: View, FileInfoViewActionDelegateProtocol {
     
     @EnvironmentObject var store: ContentViewStore
+    @ObservedObject var logsRepo = LogItemRepository.shared
     @State var showingRenameSheet = false
     @State var statusText : String = ""
     @State private var selectedFileInfoID :  FileInfo.ID? = nil
@@ -230,18 +231,30 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
     {
         var renamedCounter = 0
         let fileHelper = FileHelper()
-        let filesToRename = store.fileInfoList.filter { $0.needToBeRenamed == false }
+        let filesToRename = store.fileInfoList.filter { $0.needToBeRenamed == true }
         
         for info in  filesToRename
         {
-            print("From : \(info.currentFileNameWithPathAndExtension)")
-            print("To : \(info.destinationFileNameWithPathExtension)")
-            let renameSuccessful = fileHelper.moveItemAtPath(sourcePath: info.currentFileNameWithPathAndExtension, toPath: info.destinationFileNameWithPathExtension)
-            let newFilenameFound = fileHelper.checkIfFileDoesExists(file: info.destinationFileNameWithPathExtension)
-            
-            if renameSuccessful && newFilenameFound {
-                info.Update();
-                renamedCounter = renamedCounter + 1
+            do {
+                let renameSuccessful = try fileHelper.moveItemAtPath(sourcePath: info.currentFileNameWithPathAndExtension, toPath: info.destinationFileNameWithPathExtension)
+                let newFilenameFound = fileHelper.checkIfFileDoesExists(file: info.destinationFileNameWithPathExtension)
+
+                if renameSuccessful && newFilenameFound
+                {
+                    info.Update()
+                    renamedCounter = renamedCounter + 1
+                    self.logsRepo.addItem(item: LogItem(message: "File renamed from \(info.currentFileNameWithPathAndExtension) to \(info.destinationFileNameWithPathExtension)" , priority: .Information))
+                } else {
+                    self.logsRepo.addItem(item: LogItem(message: "Rename failed for \(info.currentFileNameWithPathAndExtension)", priority: .Exclamation))
+                }
+            }
+            catch FileHelperError.fileMove(description: let description)
+            {
+                self.logsRepo.addItem(item: LogItem(message: "\(description)", priority: .Exclamation))
+            }
+            catch
+            {
+                self.logsRepo.addItem(item: LogItem(message: "Unkown Error for \(info.currentFileNameWithPathAndExtension): \(error.localizedDescription)", priority: .Exclamation))
             }
         }
         
@@ -290,3 +303,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

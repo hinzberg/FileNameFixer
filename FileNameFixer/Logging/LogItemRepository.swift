@@ -10,9 +10,9 @@ public class LogItemRepository: ObservableObject {
     // Make this a singleton
     static let shared = LogItemRepository()
     private init() {
-        self.addItem(item: LogItem(message: "LogItemRepository Info",  priority: .Information))
-        self.addItem(item: LogItem(message: "LogItemRepository Exclamation",  priority: .Exclamation))
-        self.addItem(item: LogItem(message: "LogItemRepository Waring",  priority: .Warning))
+        // self.addItem(item: LogItem(message: "LogItemRepository Info",  priority: .Information))
+        // self.addItem(item: LogItem(message: "LogItemRepository Exclamation",  priority: .Exclamation))
+        // self.addItem(item: LogItem(message: "LogItemRepository Warning",  priority: .Warning))
     }
     
     public func addItem(item : LogItem)

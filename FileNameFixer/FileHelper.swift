@@ -78,10 +78,15 @@ public class FileHelper
     
     func moveItemAtUrl(sourceUrl : URL, toURL destinationURL: URL) -> Bool
     {
-        return moveItemAtPath(sourcePath: sourceUrl.path, toPath: destinationURL.path)
+        do {
+            return try moveItemAtPath(sourcePath: sourceUrl.path, toPath: destinationURL.path)
+        } catch {
+            print("Could not move \(sourceUrl.path) to \(destinationURL.path): \(error.localizedDescription)")
+            return false
+        }
     }
         
-    func moveItemAtPath(sourcePath: String?, toPath destinationPath: String?) -> Bool
+    func moveItemAtPath(sourcePath: String?, toPath destinationPath: String?) throws -> Bool
     {
         var success = true
         
@@ -92,14 +97,12 @@ public class FileHelper
             }
             catch let error as NSError
             {
-                print("Could not move \(sourcePath) : \(error.localizedDescription)")
-                success = false;
+                throw FileHelperError.fileMove(description: error.localizedDescription)
             }
         }
         else
         {
-            print("Filepath could not be unwrapped. Possible NULL")
-            success = false;
+            throw FileHelperError.fileMove(description: "Filepath could not be unwrapped. Possible NULL")
         }
         return success
     }
