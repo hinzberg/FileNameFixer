@@ -88,8 +88,6 @@ public class FileHelper
         
     func moveItemAtPath(sourcePath: String?, toPath destinationPath: String?) throws -> Bool
     {
-        var success = true
-        
         if let sourcePath = sourcePath, let destinationPath = destinationPath
         {
             do  {
@@ -104,7 +102,7 @@ public class FileHelper
         {
             throw FileHelperError.fileMove(description: "Filepath could not be unwrapped. Possible NULL")
         }
-        return success
+        return true
     }
         
     func copyFiles(sourceUrls:[URL], toUrl destinationUrl: URL) -> Int
