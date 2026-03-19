@@ -12,6 +12,8 @@
 		3F1B5D7B2D115847005F42E4 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B5D7A2D115840005F42E4 /* AppConfig.swift */; };
 		3F1B5D7D2D11696E005F42E4 /* ApplicationModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B5D7C2D116965005F42E4 /* ApplicationModelContainer.swift */; };
 		3F27FD812F3CF4D6008041F7 /* FileHelperError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27FD802F3CF4C6008041F7 /* FileHelperError.swift */; };
+		3F2BDC832F6C51FF00F98174 /* SettingsBackupCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BDC822F6C51FF00F98174 /* SettingsBackupCommands.swift */; };
+		3F2BDC852F6C523000F98174 /* SettingsBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BDC842F6C523000F98174 /* SettingsBackup.swift */; };
 		3F400F0928B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */; };
 		3F4284DF2E045E480044C84A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4284DE2E045E410044C84A /* Utils.swift */; };
 		3F6CEED92D15E88C00EA6004 /* DynamicContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CEED82D15E88C00EA6004 /* DynamicContextMenu.swift */; };
@@ -46,6 +48,8 @@
 		3F1B5D7A2D115840005F42E4 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		3F1B5D7C2D116965005F42E4 /* ApplicationModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModelContainer.swift; sourceTree = "<group>"; };
 		3F27FD802F3CF4C6008041F7 /* FileHelperError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelperError.swift; sourceTree = "<group>"; };
+		3F2BDC822F6C51FF00F98174 /* SettingsBackupCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBackupCommands.swift; sourceTree = "<group>"; };
+		3F2BDC842F6C523000F98174 /* SettingsBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBackup.swift; sourceTree = "<group>"; };
 		3F400F0828B0CBA800A81D21 /* FileInfoViewActionDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewActionDelegateProtocol.swift; sourceTree = "<group>"; };
 		3F4284DE2E045E410044C84A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		3F6CEED82D15E88C00EA6004 /* DynamicContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicContextMenu.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 		3F1B5D792D1157F8005F42E4 /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
+				3F2BDC842F6C523000F98174 /* SettingsBackup.swift */,
 				3F1B5D7C2D116965005F42E4 /* ApplicationModelContainer.swift */,
 				3F1B5D7A2D115840005F42E4 /* AppConfig.swift */,
 				3FA895402AE02E0A008FAFF3 /* Settings.swift */,
@@ -108,6 +113,7 @@
 		3FA895422AE03347008FAFF3 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				3F2BDC822F6C51FF00F98174 /* SettingsBackupCommands.swift */,
 				3FB700B32AA7A63E00167ED0 /* SettingsView.swift */,
 				3FC432382AFB486F0047C145 /* CleanupPanelView.swift */,
 				3FC4323A2AFB4BB90047C145 /* PrefixesPanelView.swift */,
@@ -275,11 +281,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F2BDC832F6C51FF00F98174 /* SettingsBackupCommands.swift in Sources */,
 				3FCFA1092884969B0083B63E /* FileInfo.swift in Sources */,
 				3FCFA10F28849C1C0083B63E /* FileInfoNameClearer.swift in Sources */,
 				3F4284DF2E045E480044C84A /* Utils.swift in Sources */,
 				3FA895442AE03371008FAFF3 /* AddUnwantedWordSheetWindow.swift in Sources */,
 				3FC4323B2AFB4BB90047C145 /* PrefixesPanelView.swift in Sources */,
+				3F2BDC852F6C523000F98174 /* SettingsBackup.swift in Sources */,
 				3F1B5D7D2D11696E005F42E4 /* ApplicationModelContainer.swift in Sources */,
 				3F095F262AFC1A1E00D0F5DF /* SuffixesPanelView.swift in Sources */,
 				3FA895412AE02E0A008FAFF3 /* Settings.swift in Sources */,
