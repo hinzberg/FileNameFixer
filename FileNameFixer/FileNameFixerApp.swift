@@ -16,5 +16,8 @@ struct FileNameFixerApp: App {
         }
         .modelContainer(ApplicationModelContainer.create())
         .environment(contentViewStore)
+        .commands {
+            SettingsBackupCommands()
+        }
     }
 }
