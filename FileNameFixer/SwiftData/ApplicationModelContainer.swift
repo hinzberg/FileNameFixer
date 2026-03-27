@@ -6,7 +6,7 @@ import Foundation
 import SwiftData
 
 actor ApplicationModelContainer {
-    
+
     @MainActor
     static func create() -> ModelContainer {
         
@@ -21,7 +21,7 @@ actor ApplicationModelContainer {
             checkForDefaults(container: container)
             return container
         } catch {
-            LogItemRepository.shared.addItem(item: LogItem(message: "Could not create ModelContainer: \(error.localizedDescription)", priority: .Exclamation))
+            logError("Could not create ModelContainer: \(error.localizedDescription)")
             fatalError("Could not create ModelContainer: \(error)")
         }
     }
@@ -32,18 +32,30 @@ actor ApplicationModelContainer {
         let settingsCount = (try? container.mainContext.fetchCount(FetchDescriptor<Settings>())) ?? 0
         if  settingsCount == 0 {
             print("No Settings found. Creating default")
-            LogItemRepository.shared.addItem(item: LogItem(message: "No Settings found. Creating default", priority: .Warning))
+            logWarning("No Settings found. Creating default")
             container.mainContext.insert( Settings())
         } else {
-            LogItemRepository.shared.addItem(item: LogItem(message: "Settings loaded", priority: .Information))
+            logInfo("Settings loaded")
         }
                
         let configCount = (try? container.mainContext.fetchCount(FetchDescriptor<AppConfig>())) ?? 0
         if  configCount == 0 {
-            LogItemRepository.shared.addItem(item: LogItem(message: "No AppConfig found. Creating default", priority: .Warning))
+            logWarning("No AppConfig found. Creating default")
             container.mainContext.insert( AppConfig())
         } else {
-            LogItemRepository.shared.addItem(item: LogItem(message: "AppConfig loaded", priority: .Information))
+            logInfo("AppConfig loaded")
         }
+    }
+
+    private static func logInfo(_ message: String) {
+        LogItemRepository.shared.addItem(item: LogItem(message: message, priority: .Information))
+    }
+
+    private static func logWarning(_ message: String) {
+        LogItemRepository.shared.addItem(item: LogItem(message: message, priority: .Warning))
+    }
+
+    private static func logError(_ message: String) {
+        LogItemRepository.shared.addItem(item: LogItem(message: message, priority: .Exclamation))
     }
 }

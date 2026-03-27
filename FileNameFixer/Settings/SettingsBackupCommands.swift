@@ -9,6 +9,7 @@ import UniformTypeIdentifiers
 struct SettingsBackupCommands: Commands {
 
     private let modelContext: ModelContext
+    private let logRepository = LogItemRepository.shared
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
@@ -27,10 +28,12 @@ struct SettingsBackupCommands: Commands {
     }
 
     private func exportSettingsJSON() {
+        logInfo("Starting settings export")
 
         do {
             try modelContext.save()
         } catch {
+            logError("Export failed while saving pending changes: \(error.localizedDescription)")
             showErrorAlert(
                 title: "Export Settings Failed",
                 message: "Could not save pending changes before export: \(error.localizedDescription)"
@@ -63,22 +66,30 @@ struct SettingsBackupCommands: Commands {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
 
-        guard let panel = makeSavePanel(defaultFileName: "FileNameFixerSettings.json") else { return }
+        guard let panel = makeSavePanel(defaultFileName: "FileNameFixerSettings.json") else {
+            logWarning("Export cancelled: save panel could not be created")
+            return
+        }
 
         if panel.runModal() == .OK, let url = panel.url {
             do {
                 let data = try encoder.encode(backup)
                 try data.write(to: url, options: [.atomic])
+                logInfo("Settings export completed: \(url.lastPathComponent)")
             } catch {
+                logError("Export failed: \(error.localizedDescription)")
                 showErrorAlert(
                     title: "Export Settings Failed",
                     message: error.localizedDescription
                 )
             }
+        } else {
+            logWarning("Settings export cancelled by user")
         }
     }
 
     private func importSettingsJSON() {
+        logInfo("Starting settings import")
         let panel = NSOpenPanel()
         panel.allowedContentTypes = [UTType.json]
         panel.allowsMultipleSelection = false
@@ -136,17 +147,21 @@ struct SettingsBackupCommands: Commands {
                 }
 
                 try modelContext.save()
+                logInfo("Settings import completed: \(url.lastPathComponent)")
 
                 showInfoAlert(
                     title: "Import Settings Completed",
                     message: "Imported settings from \"\(url.lastPathComponent)\"."
                 )
             } catch {
+                logError("Import failed: \(error.localizedDescription)")
                 showErrorAlert(
                     title: "Import Settings Failed",
                     message: error.localizedDescription
                 )
             }
+        } else {
+            logWarning("Settings import cancelled by user")
         }
     }
 
@@ -172,6 +187,18 @@ struct SettingsBackupCommands: Commands {
         panel.canCreateDirectories = true
         panel.nameFieldStringValue = defaultFileName
         return panel
+    }
+
+    private func logInfo(_ message: String) {
+        logRepository.addItem(item: LogItem(message: message, priority: .Information))
+    }
+
+    private func logWarning(_ message: String) {
+        logRepository.addItem(item: LogItem(message: message, priority: .Warning))
+    }
+
+    private func logError(_ message: String) {
+        logRepository.addItem(item: LogItem(message: message, priority: .Exclamation))
     }
 }
 

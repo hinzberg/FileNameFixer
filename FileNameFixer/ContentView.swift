@@ -108,7 +108,7 @@ struct ContentView: View, FileInfoViewActionDelegateProtocol {
             }
             ToolbarItem(id: "rename") {
                 Button(action: rename) {
-                    Label("Rename", systemImage: "wand.and.rays")
+                    Label("Rename", systemImage: "wand.and.sparkles.inverse")
                 }
             }
             ToolbarItem(id: "cleanup") {
