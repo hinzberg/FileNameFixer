@@ -21,6 +21,7 @@ actor ApplicationModelContainer {
             checkForDefaults(container: container)
             return container
         } catch {
+            LogItemRepository.shared.addItem(item: LogItem(message: "Could not create ModelContainer: \(error.localizedDescription)", priority: .Exclamation))
             fatalError("Could not create ModelContainer: \(error)")
         }
     }
@@ -31,13 +32,18 @@ actor ApplicationModelContainer {
         let settingsCount = (try? container.mainContext.fetchCount(FetchDescriptor<Settings>())) ?? 0
         if  settingsCount == 0 {
             print("No Settings found. Creating default")
+            LogItemRepository.shared.addItem(item: LogItem(message: "No Settings found. Creating default", priority: .Warning))
             container.mainContext.insert( Settings())
+        } else {
+            LogItemRepository.shared.addItem(item: LogItem(message: "Settings loaded", priority: .Information))
         }
                
         let configCount = (try? container.mainContext.fetchCount(FetchDescriptor<AppConfig>())) ?? 0
         if  configCount == 0 {
-            print("No AppConfig found. Creating default")
+            LogItemRepository.shared.addItem(item: LogItem(message: "No AppConfig found. Creating default", priority: .Warning))
             container.mainContext.insert( AppConfig())
+        } else {
+            LogItemRepository.shared.addItem(item: LogItem(message: "AppConfig loaded", priority: .Information))
         }
     }
 }
