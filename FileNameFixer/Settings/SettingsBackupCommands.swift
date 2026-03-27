@@ -1,9 +1,5 @@
-//
 //  SettingsBackupCommands.swift
 //  FileNameFixer
-//
-//  Created by Cursor on 19.03.26.
-//
 
 import SwiftUI
 import SwiftData
@@ -11,7 +7,12 @@ import AppKit
 import UniformTypeIdentifiers
 
 struct SettingsBackupCommands: Commands {
-    @Environment(\.modelContext) private var modelContext
+
+    private let modelContext: ModelContext
+
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+    }
 
     var body: some Commands {
         CommandGroup(after: .newItem) {
@@ -26,7 +27,21 @@ struct SettingsBackupCommands: Commands {
     }
 
     private func exportSettingsJSON() {
+
+        do {
+            try modelContext.save()
+        } catch {
+            showErrorAlert(
+                title: "Export Settings Failed",
+                message: "Could not save pending changes before export: \(error.localizedDescription)"
+            )
+            return
+        }
+        
         let allSettings = (try? modelContext.fetch(FetchDescriptor<Settings>())) ?? []
+        let unwantedWords = (try? modelContext.fetch(FetchDescriptor<UnwantedWord>())) ?? []
+        let prefixes = (try? modelContext.fetch(FetchDescriptor<Prefix>())) ?? []
+        let suffixes = (try? modelContext.fetch(FetchDescriptor<Suffix>())) ?? []
 
         // The container already creates a default Settings, but we keep this safe for future changes/migrations.
         let settingsToExport: Settings
@@ -38,7 +53,12 @@ struct SettingsBackupCommands: Commands {
             settingsToExport = created
         }
 
-        let backup = SettingsBackup(from: settingsToExport)
+        let backup = SettingsBackup(
+            from: settingsToExport,
+            unwantedWords: unwantedWords,
+            prefixes: prefixes,
+            suffixes: suffixes
+        )
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
@@ -89,6 +109,32 @@ struct SettingsBackupCommands: Commands {
                 }
 
                 backup.apply(to: settingsToOverwrite)
+
+                // Overwrite semantics for word lists: clear existing items and replace with the imported ones.
+                let existingUnwantedWords = (try? modelContext.fetch(FetchDescriptor<UnwantedWord>())) ?? []
+                for w in existingUnwantedWords {
+                    modelContext.delete(w)
+                }
+                for word in backup.unwantedWords {
+                    modelContext.insert(UnwantedWord(word: word))
+                }
+
+                let existingPrefixes = (try? modelContext.fetch(FetchDescriptor<Prefix>())) ?? []
+                for p in existingPrefixes {
+                    modelContext.delete(p)
+                }
+                for word in backup.prefixes {
+                    modelContext.insert(Prefix(word: word))
+                }
+
+                let existingSuffixes = (try? modelContext.fetch(FetchDescriptor<Suffix>())) ?? []
+                for s in existingSuffixes {
+                    modelContext.delete(s)
+                }
+                for word in backup.suffixes {
+                    modelContext.insert(Suffix(word: word))
+                }
+
                 try modelContext.save()
 
                 showInfoAlert(

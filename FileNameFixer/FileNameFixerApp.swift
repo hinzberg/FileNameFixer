@@ -8,16 +8,17 @@ import SwiftData
 struct FileNameFixerApp: App {
     
     var contentViewStore = ContentViewStore()
+    private let modelContainer = ApplicationModelContainer.create()
     
     var body: some Scene {
         WindowGroup {
             NavigationManagerView()
                // .background(VisualEffectView())
         }
-        .modelContainer(ApplicationModelContainer.create())
+        .modelContainer(modelContainer)
         .environment(contentViewStore)
         .commands {
-            SettingsBackupCommands()
+            SettingsBackupCommands(modelContext: modelContainer.mainContext)
         }
     }
 }
