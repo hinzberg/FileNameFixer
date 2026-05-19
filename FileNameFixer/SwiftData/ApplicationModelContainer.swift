@@ -14,8 +14,9 @@ actor ApplicationModelContainer {
             Settings.self, UnwantedWord.self, Prefix.self, Suffix.self, AppConfig.self
         ])
         
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
+        let storeURL = URL.documentsDirectory.appending(path: "FileNameFixer//database.sqlite")
+        let modelConfiguration = ModelConfiguration(schema: schema, url: storeURL)
+        
         do {
             let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
             checkForDefaults(container: container)
@@ -27,8 +28,8 @@ actor ApplicationModelContainer {
     }
     
     @MainActor
-    private static func checkForDefaults(container : ModelContainer) {
-        
+    private static func checkForDefaults(container : ModelContainer)
+    {
         let settingsCount = (try? container.mainContext.fetchCount(FetchDescriptor<Settings>())) ?? 0
         if  settingsCount == 0 {
             print("No Settings found. Creating default")

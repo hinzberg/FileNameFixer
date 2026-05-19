@@ -8,6 +8,7 @@ import UniformTypeIdentifiers
 
 struct SettingsBackupCommands: Commands {
 
+    private let storeURL = URL.documentsDirectory.appending(path: "FileNameFixer")
     private let modelContext: ModelContext
     private let logRepository = LogItemRepository.shared
 
@@ -95,6 +96,7 @@ struct SettingsBackupCommands: Commands {
         panel.allowsMultipleSelection = false
         panel.canCreateDirectories = false
         panel.canChooseDirectories = false
+        panel.directoryURL = storeURL
 
         if panel.runModal() == .OK, let url = panel.url {
             do {
@@ -181,11 +183,13 @@ struct SettingsBackupCommands: Commands {
         alert.runModal()
     }
 
-    private func makeSavePanel(defaultFileName: String) -> NSSavePanel? {
+    private func makeSavePanel(defaultFileName: String) -> NSSavePanel?
+    {
         let panel = NSSavePanel()
         panel.allowedContentTypes = [UTType.json]
         panel.canCreateDirectories = true
         panel.nameFieldStringValue = defaultFileName
+        panel.directoryURL = storeURL
         return panel
     }
 

@@ -1,9 +1,5 @@
-//
 //  SettingsBackup.swift
 //  FileNameFixer
-//
-//  Created by Cursor on 19.03.26.
-//
 
 import Foundation
 import SwiftData
